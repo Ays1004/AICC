@@ -6,11 +6,11 @@
 WHAT IS IN THIS PENDRIVE
 ------------------------
 01_Artificial_Intelligence/
-    Six AI practicals (Python code + handout + write-up + steps).
+    Six AI practicals (Python code + steps + sample input/output).
 
 02_Cloud_Computing/
     Four Cloud Computing practicals (AWS EC2, KVM, Salesforce Apex,
-    Salesforce custom app + handout + write-up + steps).
+    Salesforce custom app + steps and guides).
 
 03_CHEATSHEETS/
     Ubuntu terminal commands, viva questions and troubleshooting.

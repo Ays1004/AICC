@@ -31,7 +31,7 @@ Practical 4 - N-Queens
 
 Practical 5 - Chatbot
     code/main.py                              restaurant chatbot
-    code/investment_chatbot.py                handout version
+    code/investment_chatbot.py                investment advisor version
     code/alternative_nltk_chat.py             optional NLTK
     code/my_simple_chatbot.py
 
@@ -53,12 +53,11 @@ CLOUD COMPUTING
 ===============
 Practical 1 - AWS EC2
     DO_THIS_FIRST.txt (console + SSH commands)
-    Handout.pdf, Write-up.pdf
 
 Practical 2 - KVM
     DO_THIS_FIRST.txt (all Ubuntu commands)
     Steps_to_install_KVM.md (original repo steps)
-    Handout.pdf, Write-up.pdf, Output.pdf
+    Output.pdf (sample output reference)
 
 Practical 3 - Salesforce Apex
     DO_THIS_FIRST.txt (Developer Console steps)
@@ -76,10 +75,6 @@ Practical 4 - Salesforce Custom App
     Salesforce_Custom_Application_Steps.pdf
     Create_Custom_Apps_Classic_Steps.pdf
 
-Theory assignments:
-    Assignments/CC_Assignment-1.pdf
-    Assignments/CC_Assignment-2.pdf
-
 
 CHEATSHEETS
 ===========
@@ -88,6 +83,4 @@ CHEATSHEETS
 03_CHEATSHEETS/PRINT_ME_CHECKLIST.txt
 03_CHEATSHEETS/AI_VIVA_QA.txt
 03_CHEATSHEETS/CC_VIVA_QA.txt
-03_CHEATSHEETS/WRITEUP_HELPER_AI.txt
-03_CHEATSHEETS/WRITEUP_HELPER_CC.txt
 03_CHEATSHEETS/TROUBLESHOOTING.txt

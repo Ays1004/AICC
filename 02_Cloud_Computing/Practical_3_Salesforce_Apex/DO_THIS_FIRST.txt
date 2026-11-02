@@ -18,7 +18,7 @@ A Salesforce Developer login (free Developer Edition org).
 
 FILES IN THIS FOLDER
 --------------------
-Handout.pdf, Write-up.pdf, Output.pdf
+Output.pdf                   sample output reference
 Bank-App.md                  repository notes for the bank app
 Setup.md                     repository notes for the simple account demo
 code/AccountService.cls          recommended Apex class
@@ -178,7 +178,7 @@ WHAT TO SCREENSHOT
 4. The Accounts list with the new records.
 5. Optional: the Visualforce bank form and the created account.
 
-Attach the screenshots to Write-up.pdf.
+Attach the screenshots to your lab write-up.
 
 
 HOW APEX WORKS (for viva)

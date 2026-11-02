@@ -1,7 +1,7 @@
 # AICC — AI & Cloud Computing Lab Pack
 
-Ubuntu-lab-ready practical code, handouts, write-ups, sample input/output, and
-step-by-step terminal instructions for the **Artificial Intelligence** and
+Ubuntu-lab-ready practical code, sample input/output, and step-by-step
+terminal instructions for the **Artificial Intelligence** and
 **Cloud Computing** lab (SPPU TE Computer Engineering).
 
 ## Start here
@@ -11,8 +11,8 @@ step-by-step terminal instructions for the **Artificial Intelligence** and
 | `START_HERE.txt` | First file to read on the lab machine; pendrive path, Python setup, how to run |
 | `CODE_INDEX.txt` | Maps every code file to its practical |
 | `01_Artificial_Intelligence/` | Six AI practicals |
-| `02_Cloud_Computing/` | Four Cloud Computing practicals + two theory assignments |
-| `03_CHEATSHEETS/` | Ubuntu commands, viva Q&A, write-up helpers, troubleshooting |
+| `02_Cloud_Computing/` | Four Cloud Computing practicals |
+| `03_CHEATSHEETS/` | Ubuntu commands, viva Q&A, troubleshooting |
 
 Every practical folder contains a **`DO_THIS_FIRST.txt`** with:
 

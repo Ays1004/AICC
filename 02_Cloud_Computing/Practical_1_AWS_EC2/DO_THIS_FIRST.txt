@@ -17,9 +17,7 @@ Use the account provided by the college if you do not have your own.
 
 FILES IN THIS FOLDER
 --------------------
-Handout.pdf              college handout
-Write-up.pdf             blank write-up
-
+DO_THIS_FIRST.txt   this instruction file
 
 PART A - WHAT TO DO IN THE AWS CONSOLE (browser)
 ------------------------------------------------
@@ -183,7 +181,7 @@ WHAT TO SCREENSHOT
 4. Optional: the Apache page in the browser.
 5. The stopped or terminated state at the end.
 
-Attach the screenshots to Write-up.pdf.
+Attach the screenshots to your lab write-up.
 
 
 VIVA QUESTIONS AND SHORT ANSWERS

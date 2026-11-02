@@ -19,7 +19,6 @@ for Practical 3).
 
 FILES IN THIS FOLDER
 --------------------
-Handout.pdf, Write-up.pdf
 Create_Custom_Apps_Classic_Steps.pdf       Salesforce Classic steps
 Salesforce_Custom_Application_Steps.pdf    steps with images
 Objects_Online_Shopping.md                 object design (recommended demo)
@@ -279,7 +278,7 @@ WHAT TO SCREENSHOT
 5. Sample records in each tab.
 6. The Customer record showing the related Order Details.
 
-Attach the screenshots to Write-up.pdf. A data-model diagram
+Attach the screenshots to your lab write-up. A data-model diagram
 (objects, fields, relationships) is a good addition to the write-up.
 
 

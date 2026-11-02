@@ -21,7 +21,6 @@ code/main.py                    recommended 8-puzzle program
 code/alternative_maze.py        A* on a maze (another game search problem)
 code/alternative_generic_graph.py  A* on a weighted graph using heuristics
 code/my_simple_8_puzzle.py      simpler hard-coded 8-puzzle version
-Handout.pdf, Write-up.pdf
 sample_input.txt                input for the demo below
 sample_output.txt               exact output of the demo
 sample_input_maze.txt           input for the maze alternative

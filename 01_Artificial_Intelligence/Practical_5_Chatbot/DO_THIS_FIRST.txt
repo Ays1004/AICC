@@ -8,7 +8,7 @@ The repository README states:
 "Develop an elementary chatbot for any suitable customer
 interaction application."
 
-The printed handout in this folder states:
+The handout for this practical states:
 "Develop an elementary chatbot for suggesting investment as per the
 customer needs."
 
@@ -24,10 +24,9 @@ examiner asks specifically for investment suggestions.
 FILES IN THIS FOLDER
 --------------------
 code/main.py                      restaurant chatbot (recommended)
-code/investment_chatbot.py        investment chatbot (handout version)
+code/investment_chatbot.py        investment advisor chatbot
 code/alternative_nltk_chat.py     NLTK-based chatbot (needs pip install)
 code/my_simple_chatbot.py         simpler dictionary-based chatbot
-Handout.pdf, Write-up.pdf
 sample_input.txt                  conversation for main.py
 sample_output.txt                 exact output for main.py
 sample_input_investment.txt       conversation for investment_chatbot.py
@@ -71,7 +70,7 @@ STEP-BY-STEP IN THE UBUNTU LAB (RESTAURANT CHATBOT)
    (or press Ctrl+C).
 
 
-STEP-BY-STEP FOR THE INVESTMENT CHATBOT (HANDOUT VERSION)
+STEP-BY-STEP FOR THE INVESTMENT CHATBOT (INVESTMENT ADVISOR VERSION)
 ---------------------------------------------------------
 1. In the same code folder, run:
 

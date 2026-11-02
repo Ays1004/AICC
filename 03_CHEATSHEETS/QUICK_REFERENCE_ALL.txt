@@ -35,7 +35,7 @@ P5 - Chatbot (restaurant)
     python3 main.py
     # type menu, cost, contact, book, hours, date, exit
 
-P5 - Chatbot (investment, handout version)
+P5 - Chatbot (investment, advisor version)
     python3 investment_chatbot.py
 
 P6 - Expert system (medical)

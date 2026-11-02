@@ -18,12 +18,7 @@ for the AWS SSH connection and for the KVM installation on Ubuntu.
 
 Each folder has:
     DO_THIS_FIRST.txt   exact step-by-step instructions
-    Handout.pdf         college handout
-    Write-up.pdf        blank write-up
     extra PDFs / notes  where available
-
-The Assignments folder contains the two theory assignments from the
-Cloud Computing repository (CC Assignment-1 and Assignment-2).
 
 WHAT YOU NEED BEFORE THE LAB
 ----------------------------
@@ -70,8 +65,6 @@ Practicals 3 and 4 are browser-only, so they are easy to revise
 quickly. Practical 2 (KVM) has the most terminal commands; practise
 those first.
 
-VIVA AND WRITE-UP HELP
-----------------------
+VIVA HELP
+---------
 See 03_CHEATSHEETS/CC_VIVA_QA.txt for a combined question bank.
-See 03_CHEATSHEETS/WRITEUP_HELPER_CC.txt for ready-to-write Aim,
-Procedure and Conclusion sections.

@@ -7,20 +7,22 @@ SOURCE REPOSITORIES
    Used for:
    - Codes/Assignment-A1.py ... Assignment-C6.py
    - Codes/Alternatives/*.py
-   - Practical/Assignment-A1 ... Assignment-C6 (handouts and write-ups)
+   - Practical/Assignment-A1 ... Assignment-C6 (problem statements
+     used to write the DO_THIS_FIRST.txt files)
 
 2. Cloud Computing (CC)
    https://git.kska.io/sppu-te-comp-content/CloudComputing.git
 
    Used for:
-   - Practical/Assignment-1 ... Assignment-4 (handouts, write-ups,
-     KVM steps, Salesforce notes, object definitions and PDF guides)
+   - Practical/Assignment-1 ... Assignment-4 (KVM steps, Salesforce
+     notes, object definitions and PDF guides)
 
 WHAT WAS EXCLUDED
 -----------------
-The large Notes folders and question papers were not copied. This
-pendrive is meant for the practical lab, so only the practical
-material, code and the two short CC theory assignments are included.
+The large Notes folders, question papers, handouts, write-ups and
+assignment PDFs were not copied. This pendrive is meant for the
+practical lab, so only code, instructions, sample input/output and
+the remaining reference guides are included.
 
 WHAT WAS CHANGED
 ----------------
@@ -36,9 +38,9 @@ The code is based on the repositories, with small lab-friendly changes:
    - main() is called only when the file is run directly
 
 3. Practical 5 (Chatbot)
-   - added investment_chatbot.py because the printed handout asks for
-     an investment-suggestion chatbot, while the repository main code
-     is a restaurant chatbot
+   - added investment_chatbot.py because the handout problem statement
+     asks for an investment-suggestion chatbot, while the repository
+     main code is a restaurant chatbot
 
 4. Practical 6 (Expert System)
    - the memory question was inverted in the repository code; it now

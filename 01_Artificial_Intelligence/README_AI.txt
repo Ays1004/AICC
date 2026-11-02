@@ -13,7 +13,7 @@ No.  Folder                          Main program                 Concept
 3    Practical_3_Greedy_Search       code/main.py                 Selection sort + job scheduling
 4    Practical_4_N_Queens            code/main.py                 N-Queens using backtracking
 5    Practical_5_Chatbot             code/main.py                 Rule-based restaurant chatbot
-                                      code/investment_chatbot.py   Investment chatbot (handout version)
+                                      code/investment_chatbot.py   Investment advisor chatbot
 6    Practical_6_Expert_System       code/main.py                 Medical expert system
 
 HOW TO RUN ANY PRACTICAL
@@ -38,8 +38,6 @@ To stop a program early, press Ctrl+C.
 WHAT EACH FOLDER CONTAINS
 -------------------------
 DO_THIS_FIRST.txt   exact steps, sample input, expected output, viva Q&A
-Handout.pdf         the college handout for that practical
-Write-up.pdf        the blank write-up / lab manual pages
 sample_input.txt    ready-to-use input for the main program
 sample_output.txt   output produced by the sample input
 code/main.py        the recommended program
@@ -69,9 +67,7 @@ If you only have 15 minutes before the lab, revise:
 - Practical 4: backtracking + column/diagonal arrays
 - Practical 6: knowledge base + inference engine
 
-VIVA AND WRITE-UP HELP
-----------------------
+VIVA HELP
+---------
 See 03_CHEATSHEETS/AI_VIVA_QA.txt for a combined question bank.
-See 03_CHEATSHEETS/WRITEUP_HELPER_AI.txt for ready-to-write Aim,
-Algorithm and Conclusion sections.
 Each DO_THIS_FIRST.txt also has questions specific to that practical.

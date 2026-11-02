@@ -23,7 +23,6 @@ code/alternative_employee.py    employee performance evaluation
 code/alternative_stock.py       stock market trading (needs experta)
 code/alternative_airline.py     airline/cargo scheduling (needs experta)
 code/my_simple_hospital.py      simpler hospital system with patient class
-Handout.pdf, Write-up.pdf
 sample_input.txt                answers for the demo below
 sample_output.txt               exact output of the demo
 

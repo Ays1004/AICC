@@ -17,7 +17,6 @@ FILES IN THIS FOLDER
 code/main.py                n-queens using backtracking
 code/graph_coloring.py      graph coloring (alternative problem)
 code/my_simple_n_queens.py  simpler class-based n-queens version
-Handout.pdf, Write-up.pdf
 sample_input.txt            input for the demo (4 queens)
 sample_output.txt           exact output of the demo
 

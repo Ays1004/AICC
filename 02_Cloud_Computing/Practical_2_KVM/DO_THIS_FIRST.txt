@@ -17,8 +17,6 @@ with hardware virtualization (Intel VT-x or AMD-V) enabled in BIOS.
 
 FILES IN THIS FOLDER
 --------------------
-Handout.pdf              college handout
-Write-up.pdf             blank write-up
 Output.pdf               sample output reference
 Steps_to_install_KVM.md  the repository's original KVM steps
 
@@ -204,7 +202,7 @@ STEP 9 - WHAT TO SCREENSHOT
 4. The virt-manager window showing QEMU/KVM connected.
 5. Optional: a test VM running.
 
-Attach the screenshots to Write-up.pdf.
+Attach the screenshots to your lab write-up.
 
 
 HOW KVM WORKS (for viva)

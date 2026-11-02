@@ -27,7 +27,6 @@ code/alternative_prim_mst_combined.py   selection sort + Prim's MST
 code/alternative_prim_mst_only.py       Prim's MST only
 code/my_simple_selection_sort.py        simpler menu version
 code/my_simple_prims_mst.py             simpler Prim's MST with labels
-Handout.pdf, Write-up.pdf
 sample_input.txt                        input for the demo below
 sample_output.txt                       exact output of the demo
 

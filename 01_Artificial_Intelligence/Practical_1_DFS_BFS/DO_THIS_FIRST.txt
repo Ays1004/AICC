@@ -14,8 +14,6 @@ FILES IN THIS FOLDER
 code/main.py                       recommended program
 code/alternative_adjacency_matrix.py  hard-coded graph, no input
 code/my_simple_dfs_bfs.py          simpler version using an adjacency list
-Handout.pdf                        college handout
-Write-up.pdf                       blank write-up
 sample_input.txt                   input used in the demo below
 sample_output.txt                  exact output of the demo
 
@@ -164,4 +162,4 @@ Take a screenshot of:
 1. the code in the editor / terminal,
 2. the DFS output,
 3. the BFS output.
-Attach them to Write-up.pdf, or write the output neatly by hand.
+Attach them to your lab write-up, or write the output neatly by hand.
