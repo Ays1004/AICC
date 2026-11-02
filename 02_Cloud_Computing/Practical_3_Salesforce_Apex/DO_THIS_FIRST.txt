@@ -1,0 +1,316 @@
+============================================================
+CLOUD COMPUTING PRACTICAL 3 - SALESFORCE APEX APPLICATION
+============================================================
+
+TITLE (from the handout)
+------------------------
+Creating an application in Salesforce.com using the Apex
+programming language.
+
+OBJECTIVE
+---------
+To learn the concept of the Apex programming language using
+Salesforce.com.
+
+PREREQUISITE
+------------
+A Salesforce Developer login (free Developer Edition org).
+
+FILES IN THIS FOLDER
+--------------------
+Handout.pdf, Write-up.pdf, Output.pdf
+Bank-App.md                  repository notes for the bank app
+Setup.md                     repository notes for the simple account demo
+code/AccountService.cls          recommended Apex class
+code/execute_anonymous.apex      code to run after saving the class
+code/BankCustomerCreator.cls     controller for the bank form
+code/BankCustomerForm.page       Visualforce page for the bank form
+
+
+STEP 0 - GET A SALESFORCE DEVELOPER ACCOUNT (if you do not have one)
+--------------------------------------------------------------------
+1. Open:
+
+       https://developer.salesforce.com/signup
+
+2. Fill the form:
+   - First name, Last name
+   - Email: your real email (you need the verification link)
+   - Role: Student
+   - Company: your college name
+   - Country: India
+   - Username: something unique in email format, for example
+         yourname.sppu2026@example.com
+     This does NOT have to be a real mailbox, but it must look like an
+     email and must be unique. Write it down.
+   - Password: at least 8 characters with a letter and a number.
+3. Accept the terms and click Sign me up.
+4. Open the verification email and click the link.
+5. Log in at:
+
+       https://login.salesforce.com
+
+   From the Ubuntu terminal you can open it with:
+
+       xdg-open https://login.salesforce.com
+
+If the college gives you a pre-created org, skip this step and use
+that login.
+
+Note: Salesforce is a cloud platform. Apex code runs on Salesforce's
+servers. You do not run Apex with python3 on Ubuntu.
+
+
+PART A - SIMPLE APEX CLASS (recommended demo)
+---------------------------------------------
+1. Log in to Salesforce.
+
+2. Open the Developer Console:
+   - Click the gear icon (Setup) at the top right, or
+   - Click the App Launcher (9 dots) and search for "Developer Console".
+
+3. In the Developer Console: File -> New -> Apex Class.
+
+4. Name the class exactly:
+
+       AccountService
+
+   Click OK.
+
+5. Delete all the default code in the editor.
+
+6. Open this file on the pendrive:
+
+       02_Cloud_Computing/Practical_3_Salesforce_Apex/code/AccountService.cls
+
+   Copy all of it and paste it into the Developer Console editor.
+
+7. Press Ctrl+S to save. Look at the "Problems" tab at the bottom;
+   it should have no errors.
+
+8. Press Ctrl+E to open the "Execute Anonymous" window.
+
+9. Open this file:
+
+       code/execute_anonymous.apex
+
+   Copy its contents into the Execute Anonymous window.
+
+10. Click Execute.
+
+11. At the bottom, open the "Log" / "Debug Only" view. You should see:
+
+        Account created with Id: 001...
+
+12. Close the Execute Anonymous window.
+
+13. Open the App Launcher (9 dots) -> search "Accounts" -> open it.
+    You should see Test-1, Test-2 and Rahul Sharma in the list.
+
+That is the complete Apex practical: an Apex class, a method call,
+DML insert, and a SOQL query/delete method.
+
+
+PART B - BANK APPLICATION WITH A VISUALFORCE FORM (optional, for the
+         "bank application" version of the practical)
+-------------------------------------------------------------
+1. In the Developer Console: File -> New -> Apex Class.
+2. Name it:
+
+       BankCustomerCreator
+
+3. Delete the default code, paste the contents of:
+
+       code/BankCustomerCreator.cls
+
+4. Press Ctrl+S.
+
+5. File -> New -> Visualforce Page.
+6. Name it:
+
+       BankCustomerForm
+
+7. Delete the default code, paste the contents of:
+
+       code/BankCustomerForm.page
+
+8. Press Ctrl+S.
+
+9. Click the "Preview" button at the top of the editor. A browser tab
+   opens with the "Create Bank Customer" form.
+
+10. Enter:
+       Customer Name:   Rahul Sharma
+       Contact Number:  9876543210
+       Account Number:  ACC-1001
+       Account Type:    Savings
+       Segment:         Retail Banking
+
+11. Click Create. The new Account opens. Check App Launcher ->
+    Accounts.
+
+If the class name BankCustomerCreator is already used in the org,
+choose another name (for example BankCustomerCreator2) and update the
+`extensions="..."` value in the Visualforce page to match.
+
+
+PART C - DELETE AN ACCOUNT (optional)
+-------------------------------------
+1. Open Accounts and click the account you created.
+2. Look at the browser URL. It contains the record Id, for example:
+
+       .../lightning/r/Account/0015g00000ABCDE/view
+
+   The Id is the part starting with 001.
+3. In Developer Console, press Ctrl+E.
+4. Run:
+
+       AccountService.deleteAccount('0015g00000ABCDE');
+
+5. Check the Accounts list again.
+
+
+WHAT TO SCREENSHOT
+------------------
+1. The Apex class code in the Developer Console.
+2. The Execute Anonymous window with the calls.
+3. The debug log showing "Account created with Id: ...".
+4. The Accounts list with the new records.
+5. Optional: the Visualforce bank form and the created account.
+
+Attach the screenshots to Write-up.pdf.
+
+
+HOW APEX WORKS (for viva)
+-------------------------
+- Apex is a strongly typed, object-oriented language that runs on the
+  Salesforce platform (Lightning Platform). Its syntax looks like Java.
+- Apex is compiled on save into metadata; it is executed on demand by
+  the platform's runtime interpreter.
+- It can be triggered by button clicks, Visualforce pages, triggers,
+  web service calls, batch jobs, etc.
+- DML (Data Manipulation Language) inserts/updates/deletes records:
+      insert newAccount;
+      update acc;
+      delete acc;
+- SOQL (Salesforce Object Query Language) reads records:
+      [SELECT Id, Name FROM Account WHERE Id = :accountId]
+- Visualforce is a tag-based UI framework (like HTML with apex: tags)
+  that can call Apex controller methods.
+- Salesforce is multi-tenant: many orgs share the same infrastructure.
+  Governor limits stop one org from using too many resources.
+
+Common governor limits (approximate, per transaction):
+- 100 SOQL queries (synchronous)
+- 150 DML statements (synchronous)
+- 10,000 records retrieved by SOQL
+- 50,000 records processed by DML
+- 10 seconds CPU time (synchronous)
+These limits are why bulk processing (collections, one query, one DML)
+is important.
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is Salesforce?
+A1. A cloud-based CRM platform. It provides sales, service, marketing
+    and custom application development in a multi-tenant cloud.
+
+Q2. What is Apex?
+A2. A strongly typed, object-oriented programming language that runs
+    on the Salesforce platform. It is used to add business logic,
+    triggers, controllers and web services.
+
+Q3. What are the features of Apex?
+A3. Java-like syntax, object-oriented, integrated with the database,
+    runs in the cloud, supports DML/SOQL, has governor limits,
+    handles transactions, and is compiled and stored as metadata.
+
+Q4. What is DML?
+A4. Data Manipulation Language: statements that change records, such
+    as insert, update, delete and upsert.
+
+Q5. What is SOQL?
+A5. Salesforce Object Query Language: used to read records, e.g.
+    [SELECT Id, Name FROM Account].
+
+Q6. Difference between SOQL and SQL?
+A6. SOQL is designed for Salesforce objects and relationships. It does
+    not support arbitrary joins like SQL; it uses relationship queries
+    and returns sObjects. SQL can query any relational table.
+
+Q7. What is a governor limit?
+A7. A runtime limit that prevents one transaction from monopolizing
+    shared cloud resources. Examples: 100 SOQL queries and 150 DML
+    statements per synchronous transaction.
+
+Q8. What is an sObject?
+A8. A Salesforce object (standard or custom) represented in Apex. An
+    Account is an sObject; a custom object API name ends in __c.
+
+Q9. What is Visualforce?
+A9. A Salesforce framework for building web pages with tags such as
+    <apex:page>, <apex:form> and <apex:inputText>. It uses a
+    controller or controller extension.
+
+Q10. What is a controller extension?
+A10. An Apex class that adds custom logic to a standard or custom
+     controller. In the bank form, BankCustomerCreator is an extension
+     of the standard Account controller.
+
+Q11. What is an Apex trigger?
+A11. Apex code that runs automatically before or after a DML event on
+     a record (insert, update, delete, undelete).
+
+Q12. What is the difference between a class and a trigger?
+A12. A class is called explicitly (or by a page/service). A trigger is
+     invoked automatically by a database event.
+
+Q13. What is a sandbox?
+A13. A separate copy of the org used for development and testing
+     without affecting production.
+
+Q14. What is the Apex development process?
+A14. Write the class/trigger in Developer Console or VS Code, save
+     (compiles), test it (unit tests with at least 75% coverage for
+     deployment), then deploy to production.
+
+Q15. What is the difference between a standard object and a custom
+     object?
+A15. Standard objects are built into Salesforce (Account, Contact,
+     Opportunity). Custom objects are created by you and their API
+     names end with __c.
+
+Q16. What is multi-tenancy?
+A16. Multiple customers (orgs) share the same application and
+     infrastructure, while their data is logically isolated.
+
+Q17. Why did we store account type in Description?
+A17. The standard Account.Type picklist has fixed values and does not
+     include Savings/Current. Storing it in Description avoids a
+     picklist validation error. A custom field would be the proper
+     design.
+
+Q18. What is the difference between insert and upsert?
+A18. Insert always creates a new record. Upsert inserts a new record or
+     updates an existing one based on an external ID or record ID.
+
+
+COMMON PROBLEMS
+---------------
+- "Variable does not exist: AccountService": the class was not saved,
+  or you are in a different org. Save first, then execute.
+- "Unexpected token": a copied curly brace or quote is missing. Paste
+  the whole file again.
+- "Name is already used": choose a different class/page name and update
+  the references.
+- "Read only" or "insufficient access": the user profile lacks
+  permission. Use the developer/admin account.
+- Accounts tab not visible: App Launcher -> search "Accounts".
+- The bank form gives a picklist error: our lab-ready version stores
+  the type in Description, so this should not happen. If you paste the
+  original Bank-App.md code instead, add Savings/Current to the
+  Account.Type picklist first.
+- Developer Console is blank: close it and reopen; wait for it to load.
+- Salesforce session expired: log in again and reopen the Developer
+  Console.

@@ -1,0 +1,128 @@
+============================================================
+  AI + CLOUD COMPUTING LAB PENDRIVE
+  Ubuntu lab ready - read this file first
+============================================================
+
+WHAT IS IN THIS PENDRIVE
+------------------------
+01_Artificial_Intelligence/
+    Six AI practicals (Python code + handout + write-up + steps).
+
+02_Cloud_Computing/
+    Four Cloud Computing practicals (AWS EC2, KVM, Salesforce Apex,
+    Salesforce custom app + handout + write-up + steps).
+
+03_CHEATSHEETS/
+    Ubuntu terminal commands, viva questions and troubleshooting.
+
+Every practical folder contains a file called:
+
+    DO_THIS_FIRST.txt
+
+Open that file first. It tells you exactly what to type in the
+Ubuntu terminal, in order, and what output you should get.
+
+
+QUICK START ON THE LAB UBUNTU MACHINE
+------------------------------------
+1. Plug in the pendrive.
+
+2. Open the Files app and open the pendrive. The path is usually:
+
+       /media/$USER/<PENDRIVE_NAME>
+
+   To find the exact name, open Terminal (Ctrl+Alt+T) and type:
+
+       ls /media/$USER
+
+3. Go to a practical, for example:
+
+       cd /media/$USER/<PENDRIVE_NAME>/01_Artificial_Intelligence/Practical_1_DFS_BFS/code
+
+   TIP: You can also open the "code" folder in Files, right-click on
+   empty space, and choose "Open in Terminal". That avoids typing the
+   long path.
+
+4. Run the program:
+
+       python3 main.py
+
+5. Type the input shown in DO_THIS_FIRST.txt.
+
+   To run the ready-made sample automatically instead:
+
+       python3 main.py < ../sample_input.txt
+
+
+WHICH CODE SHOULD I RUN?
+------------------------
+For every AI practical the recommended file is:
+
+       code/main.py
+
+It uses only the Python standard library. You do NOT need internet
+or pip install for the six main practicals.
+
+Extra files in each code folder are alternatives or the simpler
+version of the same program. They are there only if the examiner
+asks for a different variant.
+
+
+IF PYTHON IS NOT INSTALLED
+--------------------------
+Run these two commands once:
+
+       sudo apt update
+       sudo apt install -y python3
+
+Check:
+
+       python3 --version
+
+If your lab machine only has "python" and not "python3", use
+"python" in place of "python3" everywhere.
+
+
+COPYING THIS FOLDER TO A PENDRIVE FROM THIS MAC
+------------------------------------------------
+1. Plug in the pendrive and find its name:
+
+       ls /Volumes
+
+2. Copy the whole folder (replace USB_NAME):
+
+       cp -R ~/Desktop/AICC/PENDRIVE_LAB /Volumes/USB_NAME/
+
+   Or simply drag the PENDRIVE_LAB folder into the pendrive window
+   in Finder.
+
+3. Eject safely before removing the pendrive:
+
+       diskutil eject /Volumes/USB_NAME
+
+
+IMPORTANT LAB TIPS
+------------------
+- Run the program from its "code" folder. The commands in the
+  instructions assume you are inside that folder.
+- In Python, input is line by line. Press Enter after every value.
+- If a program seems stuck, it is probably waiting for input.
+- Take screenshots of the code and the output for the write-up.
+- If the lab machine has no internet, use the main.py files only;
+  they need no packages.
+- The "_REPO_ORIGINAL" folder contains the exact code downloaded
+  from the repositories, in case you want to compare.
+
+
+SOURCE REPOSITORIES
+-------------------
+Artificial Intelligence:
+https://git.kska.io/sppu-te-comp-content/ArtificialIntelligence.git
+
+Cloud Computing:
+https://git.kska.io/sppu-te-comp-content/CloudComputing.git
+
+These are SPPU TE Computer Engineering (2019 pattern) resources.
+The repositories are not officially affiliated with SPPU.
+
+Good luck in the lab.

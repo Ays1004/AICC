@@ -1,0 +1,215 @@
+============================================================
+PRACTICAL 6 - EXPERT SYSTEM
+  Medical diagnosis (Hospitals and medical facilities)
+============================================================
+
+PROBLEM STATEMENT (from the handout)
+------------------------------------
+Implement any one of the following expert systems:
+  I.   Information management
+  II.  Hospitals and medical facilities
+  III. Help desk management
+  IV.  Employee performance evaluation
+  V.   Stock market trading
+  VI.  Airline scheduling and cargo schedules
+
+The recommended program implements option II (medical diagnosis).
+Other options are included as alternatives.
+
+FILES IN THIS FOLDER
+--------------------
+code/main.py                    medical expert system (recommended)
+code/alternative_employee.py    employee performance evaluation
+code/alternative_stock.py       stock market trading (needs experta)
+code/alternative_airline.py     airline/cargo scheduling (needs experta)
+code/my_simple_hospital.py      simpler hospital system with patient class
+Handout.pdf, Write-up.pdf
+sample_input.txt                answers for the demo below
+sample_output.txt               exact output of the demo
+
+
+STEP-BY-STEP IN THE UBUNTU LAB
+------------------------------
+1. Open Terminal (Ctrl+Alt+T).
+2. Find the pendrive name:
+
+       ls /media/$USER
+
+3. Go to the code folder (replace MYUSB):
+
+       cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_6_Expert_System/code"
+
+4. Run:
+
+       python3 main.py
+
+5. The program asks six yes/no questions. For the demo, answer:
+
+       yes     <- sneezing frequently?
+       no      <- high temperature?
+       yes     <- weak in legs and arms?
+       yes     <- forget things often?
+       no      <- cough or sore throat?
+       yes     <- pale skin?
+
+6. Expected diagnosis:
+
+       Cold
+       Iron Deficiency
+       Alzheimer's
+       Flu
+
+7. To run automatically:
+
+       python3 main.py < ../sample_input.txt
+
+8. Optional alternatives:
+
+       python3 alternative_employee.py
+
+       python3 alternative_stock.py     (requires: pip3 install experta)
+
+       python3 alternative_airline.py   (requires: pip3 install experta)
+
+
+WHAT YOU SHOULD SEE
+-------------------
+******************************
+Welcome to Doctor Smith's! ******************************
+Are you sneezing frequently? [Yes/No]     yes
+Do you have a high temperature? [Yes/No]  no
+Are you feeling weak in your legs and arms? [Yes/No]  yes
+Do you forget things often? [Yes/No]      yes
+Do you have a cough or sore throat? [Yes/No]  no
+Does your skin look pale? [Yes/No]        yes
+
+Your Diagnosis is:
+
+- Cold
+- Iron Deficiency
+- Alzheimer's
+- Flu
+
+If no symptom matches, the program prints:
+- No matching disease found. Please consult a doctor.
+
+The program only accepts "yes" or "no" (any case). It repeats the
+question until it gets a valid answer.
+
+
+HOW THE CODE WORKS (for viva)
+-----------------------------
+An expert system has three main parts:
+
+1. Knowledge base
+   The knowledge() function stores symptom -> disease rules:
+       sneezes     -> Cold
+       temperature -> Fever
+       weakness    -> Iron Deficiency
+       forgets     -> Alzheimer's
+       cough       -> Covid-19
+       paleness    -> Flu
+
+2. Inference engine
+   The doctor() function asks every question, stores the yes/no
+   answers in a dictionary, then scans the knowledge base. For every
+   symptom that is present, it adds the corresponding disease to the
+   diagnosis list. This is forward chaining: facts (symptoms) are
+   given, and rules produce conclusions (diseases).
+
+3. User interface
+   The ask() function is the text interface. It validates the answer
+   and keeps asking until the user types yes or no.
+
+This is a rule-based expert system. It does not learn; the rules are
+written by a human expert.
+
+Note: the repository's original question was "Are you able to
+remember things clearly?" but YES added Alzheimer's, which is
+backwards. This copy asks "Do you forget things often?" so YES
+correctly means the symptom is present.
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is an expert system?
+A1. A computer application that uses a knowledge base and an
+    inference engine to solve problems in a specific domain at the
+    level of a human expert.
+
+Q2. What are the components of an expert system?
+A2. Knowledge base, inference engine, and user interface. Some books
+    also list the explanation facility and knowledge acquisition
+    module.
+
+Q3. What is the knowledge base?
+A3. A store of domain facts and IF-THEN rules. Here it is the
+    symptom-to-disease dictionary.
+
+Q4. What is the inference engine?
+A4. The part that applies rules to the facts to derive conclusions.
+    Here it scans the dictionary and collects matching diseases.
+
+Q5. What is forward chaining?
+A5. Data-driven reasoning: start with known facts and apply rules to
+    derive new facts/conclusions. This program uses forward chaining.
+
+Q6. What is backward chaining?
+A6. Goal-driven reasoning: start with a goal and work backwards to
+    find the facts that support it. Used in diagnosis systems that
+    test hypotheses.
+
+Q7. What is a rule-based system?
+A7. A system whose knowledge is represented as IF condition THEN
+    action/conclusion rules.
+
+Q8. Difference between an expert system and a normal program?
+A8. An expert system separates the knowledge base from the inference
+    engine, so knowledge can be changed without rewriting the whole
+    program. It also explains its reasoning.
+
+Q9. What are the limitations of expert systems?
+A9. Knowledge acquisition is difficult, maintenance is costly, they
+    cannot handle novel situations outside their rules, and they do
+    not learn automatically.
+
+Q10. What is the role of the user interface?
+A10. It lets a non-expert user answer questions and see the
+     conclusion and explanation.
+
+Q11. Why is a dictionary used for the knowledge base?
+A11. It gives O(1) average lookup from symptom to disease and keeps
+     the rules separate from the control logic.
+
+Q12. How would you add a new disease?
+A12. Add a symptom key and disease name to knowledge(), add the
+     corresponding question to questions_list(), and the inference
+     loop will handle it automatically.
+
+Q13. What is the difference between the medical system and the stock
+     alternative?
+A13. The stock version uses the experta library and a forward-chaining
+     rule engine with Fact and Rule classes. The medical version uses
+     plain Python dictionaries and if/else logic.
+
+Q14. What is experta?
+A14. A Python rule engine library inspired by CLIPS. It lets you
+     declare facts and rules with decorators. It may not install on
+     every Python version.
+
+
+COMMON MISTAKES
+---------------
+- Answering "y" or "n". The program expects "yes" or "no" (it will
+  ask again).
+- Expecting one disease only. The program can return several diseases
+  if several symptoms are present.
+- Using alternative_stock.py or alternative_airline.py without
+  installing experta. Use main.py if pip fails.
+- Forgetting that this is forward chaining, not backward chaining.
+
+AFTER THE PRACTICAL
+-------------------
+Screenshot the questions, the answers and the diagnosis. In the
+write-up, draw the expert-system block diagram (knowledge base,
+inference engine, user interface) and write the IF-THEN rules.

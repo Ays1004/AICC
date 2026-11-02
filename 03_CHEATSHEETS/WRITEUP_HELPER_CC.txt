@@ -1,0 +1,123 @@
+============================================================
+WRITE-UP HELPER - CLOUD COMPUTING
+  Ready-to-write Aim, Procedure and Conclusion for each practical
+============================================================
+
+Use this only as a guide. Write the final answer in your own words
+and attach your own screenshots.
+
+PRACTICAL 1 - AMAZON EC2
+------------------------
+Aim:
+To study Amazon Elastic Compute Cloud (EC2) and launch a virtual
+instance using the AWS Management Console.
+
+Procedure:
+1. Log in to the AWS Management Console and select a region.
+2. Open the EC2 service and click Launch instance.
+3. Choose an AMI (Ubuntu Server 22.04 LTS).
+4. Choose an instance type (t2.micro/t3.micro).
+5. Create or select a key pair and download the .pem file.
+6. Configure the security group to allow SSH (port 22) from your IP.
+7. Launch the instance and wait for it to be running.
+8. Connect using SSH:
+       chmod 400 lab-key.pem
+       ssh -i lab-key.pem ubuntu@<public-ip>
+9. Run commands inside the instance (hostname, uname -a, etc.).
+10. Stop or terminate the instance after the practical.
+
+Conclusion:
+Thus, an Amazon EC2 instance was launched, connected to over SSH and
+studied. EC2 provides scalable, pay-as-you-go virtual servers using
+AMIs, instance types, key pairs, security groups and EBS storage.
+
+PRACTICAL 2 - KVM
+-----------------
+Aim:
+To install and configure Kernel-based Virtual Machine (KVM)
+virtualization on Ubuntu.
+
+Procedure:
+1. Check hardware virtualization:
+       grep -Ec '(vmx|svm)' /proc/cpuinfo
+       sudo apt install -y cpu-checker
+       sudo kvm-ok
+2. Install the packages:
+       sudo apt update
+       sudo apt install -y qemu-kvm libvirt-daemon-system \
+                           libvirt-clients virt-manager virtinst \
+                           bridge-utils
+3. Start and enable libvirt:
+       sudo systemctl enable --now libvirtd
+       sudo systemctl status libvirtd
+4. Add the user to the groups:
+       sudo usermod -aG libvirt,kvm $USER
+       newgrp libvirt
+5. Check the default network:
+       sudo virsh net-list --all
+6. Open Virtual Machine Manager:
+       virt-manager
+7. Confirm that QEMU/KVM is connected. Optionally create a test VM
+   from an ISO.
+
+Conclusion:
+Thus, KVM was installed and configured successfully. KVM is a type-1
+hypervisor built into the Linux kernel; QEMU provides virtual
+hardware, libvirt manages the VMs, and virt-manager provides the GUI.
+
+PRACTICAL 3 - SALESFORCE APEX
+-----------------------------
+Aim:
+To create an application in Salesforce.com using the Apex programming
+language.
+
+Procedure:
+1. Log in to Salesforce Developer org.
+2. Open Developer Console.
+3. Create an Apex class AccountService.
+4. Add methods to create an Account using DML insert and to delete an
+   Account using SOQL + DML delete.
+5. Save the class (Ctrl+S) and check for compile errors.
+6. Open Execute Anonymous (Ctrl+E) and call:
+       AccountService.createAccount('Test-1');
+7. Execute and check the debug log.
+8. Open the Accounts tab and verify the new record.
+9. Optional: create the BankCustomerCreator controller and
+   BankCustomerForm Visualforce page, preview it and create a
+   customer from the form.
+
+Conclusion:
+Thus, an Apex class and a Visualforce form were created successfully.
+Apex runs on the Salesforce platform, uses DML for record changes and
+SOQL for queries, and is limited by governor limits in the
+multi-tenant environment.
+
+PRACTICAL 4 - SALESFORCE CUSTOM APP
+-----------------------------------
+Aim:
+To design and develop a custom application (Online Shopping) using
+Salesforce Cloud.
+
+Procedure:
+1. Log in to Salesforce and open Setup -> Object Manager.
+2. Create the custom objects:
+       Product, Customer, Order Details.
+3. Add fields:
+       Product: Description, Price, Stock Quantity, Category.
+       Customer: Email, Phone, Address.
+       Order Details: Order Date, Total Amount, Status, Customer
+       (Lookup).
+4. Create custom tabs for all three objects (Setup -> Tabs).
+5. Create a Lightning app (Setup -> App Manager -> New Lightning App).
+6. Add Home, Products, Customers and Order Details to the app
+   navigation.
+7. Assign the app to the System Administrator profile and save.
+8. Open the app from App Launcher and create sample records.
+9. Verify the lookup relationship by opening a Customer and checking
+   the related orders.
+
+Conclusion:
+Thus, a custom Online Shopping application was designed and developed
+using Salesforce Cloud. It uses custom objects, fields, picklists,
+a lookup relationship, tabs and a Lightning app, demonstrating the
+Salesforce metadata-driven, multi-tenant platform.

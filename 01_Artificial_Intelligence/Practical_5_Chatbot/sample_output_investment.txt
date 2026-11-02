@@ -1,0 +1,38 @@
+=======================================================
+ Welcome to SafeInvest - Investment Advisor Chatbot
+ Ask about: savings, FD, mutual funds, stocks, risk, tax
+ Type 'exit' to stop.
+=======================================================
+
+You: Chatbot: Hello! I can help you choose an investment option.
+
+You: Chatbot: Keep 3 to 6 months of expenses in a savings account
+         or a liquid fund before investing in the market.
+
+You: Chatbot: A fixed deposit gives stable, low-risk returns.
+         It is suitable for short-term goals (1-3 years).
+
+You: Chatbot: A SIP in a diversified mutual fund is good for
+         long-term wealth creation. Start small and stay regular.
+
+You: Chatbot: Stocks can give high returns but are high-risk.
+         Invest only money you will not need for 5+ years.
+
+You: Chatbot: Low risk -> FD / debt funds. Medium risk -> hybrid
+         funds. High risk -> equity funds / direct stocks.
+
+You: Chatbot: Tax-saving options include ELSS mutual funds, PPF,
+         NPS and tax-saving fixed deposits (Section 80C).
+
+You: Chatbot: For short-term goals, prefer FDs, recurring deposits
+         or liquid funds. Avoid volatile equity investments.
+
+You: Chatbot: For long-term goals, a diversified equity mutual fund
+         or index fund through SIP is a common choice.
+
+You: Chatbot: Today's date and time is 2026-11-02 20:56:25
+
+You: Chatbot: You can ask about savings, FD, mutual funds, stocks,
+         risk, tax, short-term and long-term investment.
+
+You: Chatbot: Thank you for visiting SafeInvest. Invest wisely!

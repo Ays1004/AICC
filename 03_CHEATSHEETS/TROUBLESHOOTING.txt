@@ -1,0 +1,225 @@
+============================================================
+LAB TROUBLESHOOTING - PYTHON, UBUNTU, PENDRIVE
+============================================================
+
+"python3: command not found"
+-----------------------------
+Install Python:
+
+    sudo apt update
+    sudo apt install -y python3
+
+Check:
+
+    python3 --version
+
+If the machine uses a different command, try:
+
+    python --version
+
+"cd: no such file or directory"
+--------------------------------
+Find the real pendrive name:
+
+    ls /media/$USER
+
+Then use the exact name. If it contains spaces, use quotes:
+
+    cd "/media/$USER/My USB/01_Artificial_Intelligence"
+
+"Permission denied" when running a file
+---------------------------------------
+You normally do not need execute permission for Python:
+
+    python3 main.py
+
+If the pendrive is read-only and you need to edit:
+
+    cp main.py ~/main.py
+    cd ~
+    nano main.py
+
+If a shell script needs execute permission:
+
+    chmod +x script.sh
+
+EOFError: EOF when reading a line
+---------------------------------
+The program expected more input than you gave it. Either:
+- run it interactively and type all values, or
+- use the sample input file:
+
+    python3 main.py < ../sample_input.txt
+
+ValueError: invalid literal for int() with base 10
+---------------------------------------------------
+You typed text where the program expects a number. Check the question
+and enter only digits (for example 4, not "four").
+
+IndexError or KeyError
+----------------------
+You entered a vertex/state/value that the program did not expect.
+Read the sample input in DO_THIS_FIRST.txt and use the same format.
+
+ModuleNotFoundError: No module named 'nltk'
+--------------------------------------------
+Only the optional NLTK chatbot needs NLTK. Either install it:
+
+    sudo apt update
+    sudo apt install -y python3-pip
+    pip3 install nltk
+
+or just use the main chatbot:
+
+    python3 main.py
+
+ModuleNotFoundError: No module named 'experta'
+----------------------------------------------
+Only the stock/airline expert system alternatives need experta. It
+does not install on every Python version. Use the main medical expert
+system instead:
+
+    python3 main.py
+
+If you still want to try:
+
+    pip3 install experta
+
+pip3: command not found
+-----------------------
+    sudo apt update
+    sudo apt install -y python3-pip
+
+No internet in the lab
+----------------------
+The six main AI programs and all six DO_THIS_FIRST demos need no
+internet. Do not try to pip install anything. Use main.py.
+
+The program seems frozen
+------------------------
+It is probably waiting for input. Look at the last prompt and type the
+next value, then press Enter. Press Ctrl+C to stop.
+
+The output is different from sample_output.txt
+----------------------------------------------
+- Check that you entered the same values in the same order.
+- Traversal order depends on the order in which edges were added.
+- Dates/times in the chatbot output change every run.
+- The N-Queens program prints the first solution it finds; different
+  valid boards are possible.
+
+I cannot paste into the terminal
+--------------------------------
+Use Ctrl+Shift+V (not Ctrl+V).
+Or right-click in the terminal and choose Paste.
+
+I cannot see the pendrive
+-------------------------
+    lsblk
+    ls /media/$USER
+    df -h
+
+If it is not mounted, unplug and replug it, or open it once in the
+Files app. If it still does not appear, the USB port or the pendrive
+may be faulty. Use another port.
+
+The pendrive is read-only
+-------------------------
+- Check the tiny write-protect switch on the pendrive (if present).
+- Copy the practical folder to the Desktop and work there:
+
+    cp -R "/media/$USER/MYUSB/01_Artificial_Intelligence" ~/Desktop/
+
+Ubuntu does not open .txt files nicely
+--------------------------------------
+    less DO_THIS_FIRST.txt
+    # q to quit
+
+or open it in the Text Editor from Files.
+
+KVM: "KVM acceleration can NOT be used"
+---------------------------------------
+- Enable Intel VT-x / AMD-V in BIOS/UEFI.
+- If Ubuntu is itself a VM, enable nested virtualization on the host.
+- Check:
+
+    grep -Ec '(vmx|svm)' /proc/cpuinfo
+    lsmod | grep kvm
+
+If the output is 0, the CPU virtualization feature is off. Tell the
+teacher; do not keep reinstalling packages.
+
+KVM: virsh permission denied
+----------------------------
+    sudo usermod -aG libvirt,kvm $USER
+    newgrp libvirt
+
+or log out and log in again. Check:
+
+    groups
+
+KVM: libvirtd.service not found
+--------------------------------
+On newer Ubuntu try:
+
+    sudo systemctl enable --now virtqemud
+    sudo systemctl status virtqemud
+
+or reinstall:
+
+    sudo apt install -y libvirt-daemon-system
+
+AWS: Permission denied (publickey)
+-----------------------------------
+- Use the correct user name: ubuntu for Ubuntu, ec2-user for Amazon
+  Linux.
+- Use the correct .pem file.
+- chmod 400 lab-key.pem
+- Check that the security group allows SSH (port 22) from your IP.
+
+AWS: Connection timed out
+-------------------------
+- The instance is stopped.
+- The security group does not allow port 22 from your current IP.
+- You are using the wrong public IP.
+- The college network blocks outbound SSH (rare).
+
+AWS: instance not visible
+-------------------------
+You are in a different region. Select the same region in the top-right
+corner where you launched it.
+
+Salesforce: "Variable does not exist: AccountService"
+-------------------------------------------------------
+The Apex class was not saved, or you are in a different org. Save the
+class first (Ctrl+S), check the Problems tab, then execute again.
+
+Salesforce: "Name is already used"
+-----------------------------------
+Choose a different class/page name and update the references. For the
+Visualforce page, the `extensions` attribute must match the controller
+class name exactly.
+
+Salesforce: picklist error
+---------------------------
+The standard Account.Type picklist does not contain Savings/Current.
+The lab-ready BankCustomerCreator stores the type in Description. If
+you paste the original Bank-App.md code instead, add the picklist
+values in Setup -> Object Manager -> Account -> Type.
+
+Salesforce: Developer Console is blank
+--------------------------------------
+Close it and reopen. Wait for it to load. Check that pop-ups are not
+blocked. Log out and log in again if the session expired.
+
+Salesforce: app not visible in App Launcher
+-------------------------------------------
+- Check that the app was assigned to your profile.
+- Refresh the page.
+- Log out and log in again.
+
+WHERE TO FIND MORE HELP
+-----------------------
+- Each practical's DO_THIS_FIRST.txt has a "COMMON PROBLEMS" section.
+- 03_CHEATSHEETS/UBUNTU_TERMINAL_BASICS.txt has terminal commands.
+- 03_CHEATSHEETS/AI_VIVA_QA.txt and CC_VIVA_QA.txt have theory answers.

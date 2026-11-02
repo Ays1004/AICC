@@ -1,0 +1,10 @@
+****************************** 
+Welcome to Doctor Smith's! ******************************
+Are you sneezing frequently? [Yes/No]	Do you have a high temperature? [Yes/No]	Are you feeling weak in your legs and arms? [Yes/No]	Do you forget things often? [Yes/No]	Do you have a cough or sore throat? [Yes/No]	Does your skin look pale? [Yes/No]	
+
+Your Diagnosis is:
+
+- Cold
+- Iron Deficiency
+- Alzheimer's
+- Flu

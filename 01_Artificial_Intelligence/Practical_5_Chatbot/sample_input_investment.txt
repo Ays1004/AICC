@@ -1,0 +1,12 @@
+hello
+savings
+fd
+mutual funds
+stocks
+risk
+tax
+short term
+long term
+date
+help
+exit

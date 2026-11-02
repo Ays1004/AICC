@@ -1,0 +1,18 @@
+Welcome to the K's Restaurant!
+You can ask me about the menu, cost, contact details or reservations!
+
+You: Chatbot: Our menu includes pasta, pizza, salads, and desserts.
+
+You: Chatbot: The average cost per person is around $20.
+
+You: Chatbot: You can contact us at +91-1234567890
+
+You: Chatbot: To make a reservation, please call us at +91-1234567890 or visit our website at https://k-rest.io
+
+You: Chatbot: We are open from 11 AM to 10 PM, Monday to Sunday.
+
+You: Chatbot: Today's date and time is 2026-11-02 20:56:25.
+
+You: Chatbot: I'm just a bot, but I'm here to help you! How can I assist you today?
+
+You: Chatbot: Thank you for chatting with us! Have a great day!

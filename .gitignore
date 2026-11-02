@@ -1,0 +1,18 @@
+# Local source repositories used to build this lab pack
+_repos/
+
+# Local Python virtual environment used for PDF extraction
+.venv/
+venv/
+
+# Duplicate deliverable folder and archive (contents are at repo root)
+PENDRIVE_LAB/
+PENDRIVE_LAB.zip
+
+# macOS metadata
+.DS_Store
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo

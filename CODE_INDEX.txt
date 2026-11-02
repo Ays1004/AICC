@@ -1,0 +1,93 @@
+============================================================
+CODE INDEX - WHERE IS EVERY FILE?
+============================================================
+
+ARTIFICIAL INTELLIGENCE
+=======================
+Practical 1 - DFS/BFS
+    code/main.py                              RECOMMENDED
+    code/alternative_adjacency_matrix.py      hard-coded graph
+    code/my_simple_dfs_bfs.py                 simpler version
+
+Practical 2 - A* 8-puzzle
+    code/main.py                              RECOMMENDED
+    code/alternative_maze.py                  maze variant
+    code/alternative_generic_graph.py         weighted-graph variant
+    code/my_simple_8_puzzle.py                hard-coded simple version
+
+Practical 3 - Greedy
+    code/main.py                              RECOMMENDED
+    code/only_selection_sort.py
+    code/only_job_scheduling.py
+    code/alternative_prim_mst_combined.py
+    code/alternative_prim_mst_only.py
+    code/my_simple_selection_sort.py
+    code/my_simple_prims_mst.py
+
+Practical 4 - N-Queens
+    code/main.py                              RECOMMENDED
+    code/graph_coloring.py                    alternative CSP
+    code/my_simple_n_queens.py
+
+Practical 5 - Chatbot
+    code/main.py                              restaurant chatbot
+    code/investment_chatbot.py                handout version
+    code/alternative_nltk_chat.py             optional NLTK
+    code/my_simple_chatbot.py
+
+Practical 6 - Expert System
+    code/main.py                              RECOMMENDED (medical)
+    code/alternative_employee.py
+    code/alternative_stock.py                 optional experta
+    code/alternative_airline.py               optional experta
+    code/my_simple_hospital.py
+
+Exact repository code:
+    01_Artificial_Intelligence/_REPO_ORIGINAL/
+
+Launcher:
+    01_Artificial_Intelligence/RUN_PRACTICAL.py
+
+
+CLOUD COMPUTING
+===============
+Practical 1 - AWS EC2
+    DO_THIS_FIRST.txt (console + SSH commands)
+    Handout.pdf, Write-up.pdf
+
+Practical 2 - KVM
+    DO_THIS_FIRST.txt (all Ubuntu commands)
+    Steps_to_install_KVM.md (original repo steps)
+    Handout.pdf, Write-up.pdf, Output.pdf
+
+Practical 3 - Salesforce Apex
+    DO_THIS_FIRST.txt (Developer Console steps)
+    code/AccountService.cls
+    code/execute_anonymous.apex
+    code/BankCustomerCreator.cls
+    code/BankCustomerForm.page
+    Bank-App.md, Setup.md
+
+Practical 4 - Salesforce Custom App
+    DO_THIS_FIRST.txt (object/field/tab/app steps)
+    Objects_Online_Shopping.md
+    Objects_Accounts_Management.md
+    Objects_Contact_Management.md
+    Salesforce_Custom_Application_Steps.pdf
+    Create_Custom_Apps_Classic_Steps.pdf
+
+Theory assignments:
+    Assignments/CC_Assignment-1.pdf
+    Assignments/CC_Assignment-2.pdf
+
+
+CHEATSHEETS
+===========
+03_CHEATSHEETS/UBUNTU_TERMINAL_BASICS.txt
+03_CHEATSHEETS/QUICK_REFERENCE_ALL.txt
+03_CHEATSHEETS/PRINT_ME_CHECKLIST.txt
+03_CHEATSHEETS/AI_VIVA_QA.txt
+03_CHEATSHEETS/CC_VIVA_QA.txt
+03_CHEATSHEETS/WRITEUP_HELPER_AI.txt
+03_CHEATSHEETS/WRITEUP_HELPER_CC.txt
+03_CHEATSHEETS/TROUBLESHOOTING.txt

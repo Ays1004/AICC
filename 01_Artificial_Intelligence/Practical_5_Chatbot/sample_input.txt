@@ -1,0 +1,8 @@
+menu
+what is the cost
+contact
+book a table
+hours
+date
+how are you
+exit

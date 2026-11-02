@@ -1,0 +1,94 @@
+============================================================
+QUICK REFERENCE - ALL PRACTICALS AND COMMANDS
+============================================================
+
+Find the pendrive first:
+
+    ls /media/$USER
+
+Then replace MYUSB below with the real name.
+
+ARTIFICIAL INTELLIGENCE
+=======================
+P1 - DFS and BFS
+    cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_1_DFS_BFS/code"
+    python3 main.py
+    # or: python3 main.py < ../sample_input.txt
+
+P2 - A* for 8-puzzle
+    cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_2_A_Star_8_Puzzle/code"
+    python3 main.py
+    # input: 1 2 3 / 0 4 6 / 7 5 8
+
+P3 - Greedy: selection sort + job scheduling
+    cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_3_Greedy_Search/code"
+    python3 main.py
+    # or: python3 main.py < ../sample_input.txt
+
+P4 - N-Queens
+    cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_4_N_Queens/code"
+    python3 main.py
+    # input: 4  (then try 8)
+
+P5 - Chatbot (restaurant)
+    cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_5_Chatbot/code"
+    python3 main.py
+    # type menu, cost, contact, book, hours, date, exit
+
+P5 - Chatbot (investment, handout version)
+    python3 investment_chatbot.py
+
+P6 - Expert system (medical)
+    cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_6_Expert_System/code"
+    python3 main.py
+    # six yes/no answers
+
+LAUNCHER
+    cd "/media/$USER/MYUSB/01_Artificial_Intelligence"
+    python3 RUN_PRACTICAL.py
+
+CLOUD COMPUTING
+===============
+P1 - AWS EC2
+    Browser: https://aws.amazon.com/console/
+    Then follow Practical_1_AWS_EC2/DO_THIS_FIRST.txt
+    SSH: chmod 400 lab-key.pem
+         ssh -i lab-key.pem ubuntu@<PUBLIC_IP>
+
+P2 - KVM (Ubuntu terminal)
+    sudo apt update
+    sudo apt install -y cpu-checker
+    sudo kvm-ok
+    sudo apt install -y qemu-kvm libvirt-daemon-system libvirt-clients \
+                        virt-manager virtinst bridge-utils
+    sudo systemctl enable --now libvirtd
+    sudo usermod -aG libvirt,kvm $USER
+    newgrp libvirt
+    sudo virsh net-start default
+    sudo virsh net-autostart default
+    virsh list --all
+    virt-manager
+
+P3 - Salesforce Apex
+    Browser: https://login.salesforce.com
+    Developer Console -> File -> New -> Apex Class
+    Name: AccountService
+    Paste code/AccountService.cls, Ctrl+S
+    Ctrl+E -> paste code/execute_anonymous.apex -> Execute
+
+P4 - Salesforce custom app
+    Browser: https://login.salesforce.com
+    Setup -> Object Manager -> Create custom objects
+    Setup -> Tabs -> create tabs
+    Setup -> App Manager -> New Lightning App
+    Open the app from App Launcher
+
+EMERGENCY COMMANDS
+==================
+Stop a program:            Ctrl+C
+Clear terminal:            Ctrl+L
+Paste into terminal:       Ctrl+Shift+V
+Find a file:               find . -name "main.py"
+Read instructions:         less DO_THIS_FIRST.txt   (q to quit)
+Check Python:              python3 --version
+Install Python:            sudo apt update && sudo apt install -y python3

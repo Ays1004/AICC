@@ -1,0 +1,7 @@
+# The six main practical programs use ONLY the Python standard library.
+# Nothing in this file is required to run code/main.py.
+#
+# Optional alternatives only:
+
+nltk
+experta

@@ -1,0 +1,52 @@
+============================================================
+PRINT THIS PAGE - LAB CHECKLIST
+============================================================
+
+Before leaving for the lab
+--------------------------
+[ ] Pendrive contains the PENDRIVE_LAB folder.
+[ ] Tested one Python practical on a computer.
+[ ] Salesforce / AWS login details are written down.
+[ ] College ID / lab manual / write-up pages are packed.
+[ ] Pendrive safely ejected.
+
+At the lab - AI practicals
+--------------------------
+[ ] P1 DFS/BFS: code/main.py ran; DFS and BFS output captured.
+[ ] P2 A*: 8-puzzle solved in 3 steps; output captured.
+[ ] P3 Greedy: selection sort + job scheduling output captured.
+[ ] P4 N-Queens: 4-queens and 8-queens boards captured.
+[ ] P5 Chatbot: menu/cost/contact/book/hours/date conversation captured.
+[ ] P6 Expert system: six answers and diagnosis captured.
+
+At the lab - Cloud practicals
+-----------------------------
+[ ] P1 AWS EC2: instance launched, SSH connected, screenshots taken.
+[ ] P1 AWS EC2: instance stopped/terminated at the end.
+[ ] P2 KVM: kvm-ok, libvirtd status, virsh list, virt-manager captured.
+[ ] P3 Salesforce Apex: AccountService saved and executed; Accounts
+    records visible; screenshots taken.
+[ ] P4 Salesforce custom app: objects, fields, tabs, app and records
+    captured.
+
+After the lab
+-------------
+[ ] All screenshots copied off the lab machine (or emailed to self).
+[ ] Write-up filled and signed.
+[ ] Pendrive ejected safely.
+[ ] AWS instance stopped (billing).
+[ ] Salesforce session logged out.
+
+Marks-saving reminders
+----------------------
+- In A*, write f(n) = g(n) + h(n) and say the heuristic is admissible.
+- In n-queens, mention backtracking + column/diagonal arrays.
+- In the expert system, say "knowledge base + inference engine +
+  user interface" and "forward chaining".
+- In job scheduling, say "sort by profit, place in latest free slot
+  before deadline".
+- In AWS, mention AMI, instance type, key pair, security group,
+  EBS, stop vs terminate.
+- In KVM, mention type-1 hypervisor, QEMU, libvirt, VT-x/AMD-V.
+- In Salesforce, mention object/field/record, lookup vs master-detail,
+  governor limits and multi-tenancy.

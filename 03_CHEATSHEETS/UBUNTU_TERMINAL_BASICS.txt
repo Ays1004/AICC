@@ -1,0 +1,128 @@
+============================================================
+UBUNTU TERMINAL - THE ONLY COMMANDS YOU NEED IN THE LAB
+============================================================
+
+OPEN THE TERMINAL
+-----------------
+Ctrl + Alt + T
+
+FIND THE PENDRIVE
+-----------------
+    ls /media/$USER
+
+Example output:
+
+    MYUSB
+
+The pendrive path is then:
+
+    /media/$USER/MYUSB
+
+If the name has spaces, put it in quotes:
+
+    cd "/media/$USER/My USB"
+
+GO TO A FOLDER
+--------------
+    cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_1_DFS_BFS/code"
+
+Shortcut: open the folder in Files, right-click empty space, choose
+"Open in Terminal". Then you do not need to type the path.
+
+GO BACK / GO UP
+---------------
+    cd ..
+    cd ../..
+    cd ~              # home folder
+    cd -              # previous folder
+
+SEE WHERE YOU ARE
+-----------------
+    pwd
+    ls
+    ls -l
+    ls -la
+
+RUN A PYTHON PROGRAM
+--------------------
+    python3 main.py
+
+Run with a sample input file:
+
+    python3 main.py < ../sample_input.txt
+
+Check the Python version:
+
+    python3 --version
+
+If python3 is missing:
+
+    sudo apt update
+    sudo apt install -y python3
+
+STOP A PROGRAM
+--------------
+Ctrl + C
+
+CLEAR THE SCREEN
+----------------
+    clear
+    # or Ctrl + L
+
+READ A TEXT FILE
+----------------
+    less DO_THIS_FIRST.txt     # q to quit
+    cat DO_THIS_FIRST.txt
+    nano DO_THIS_FIRST.txt     # Ctrl+O save, Ctrl+X exit
+
+COPY A FILE TO YOUR HOME FOLDER
+-------------------------------
+If the pendrive is read-only or you want to edit a file:
+
+    cp main.py ~/main.py
+    cd ~
+    nano main.py
+
+INSTALL A PACKAGE (only if needed)
+----------------------------------
+    sudo apt update
+    sudo apt install -y python3-pip
+    pip3 install nltk
+
+CHECK INTERNET
+--------------
+    ping -c 3 google.com
+
+DISK / USB
+----------
+    df -h
+    lsblk
+
+EJECT THE PENDRIVE SAFELY
+-------------------------
+    sudo umount /media/$USER/MYUSB
+
+(Or right-click the pendrive icon in Files and choose Eject.)
+
+SCREENSHOTS
+-----------
+- Print Screen: whole screen
+- Shift + Print Screen: selected area
+- Alt + Print Screen: current window
+Screenshots are usually saved in ~/Pictures or ~/Screenshots.
+
+USEFUL KEYBOARD SHORTCUTS
+-------------------------
+Ctrl + Alt + T     open terminal
+Ctrl + C           stop the running program
+Ctrl + L           clear terminal
+Ctrl + Shift + C   copy from terminal
+Ctrl + Shift + V   paste into terminal
+Tab                auto-complete a file/folder name
+Up arrow           previous command
+
+IF A COMMAND SAYS "command not found"
+--------------------------------------
+- Check the spelling.
+- Use python3, not python, if only python3 is installed.
+- For a missing package, install it with apt or pip3 as shown above.

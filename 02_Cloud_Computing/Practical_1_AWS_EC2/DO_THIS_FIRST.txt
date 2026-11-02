@@ -1,0 +1,266 @@
+============================================================
+CLOUD COMPUTING PRACTICAL 1 - AMAZON EC2 CASE STUDY
+============================================================
+
+TITLE (from the handout)
+------------------------
+Case study on Amazon EC2 and learn about Amazon EC2 web services.
+
+OBJECTIVE
+---------
+To learn the concept of Amazon EC2 and its uses.
+
+PREREQUISITE
+------------
+AWS user ID and password. The student must be registered on AWS.
+Use the account provided by the college if you do not have your own.
+
+FILES IN THIS FOLDER
+--------------------
+Handout.pdf              college handout
+Write-up.pdf             blank write-up
+
+
+PART A - WHAT TO DO IN THE AWS CONSOLE (browser)
+------------------------------------------------
+1. Open Firefox/Chrome and go to:
+
+       https://aws.amazon.com/console/
+
+   You can also open it from the Ubuntu terminal:
+
+       xdg-open https://aws.amazon.com/console/
+
+2. Sign in with the AWS account given by the lab.
+   If the account uses an IAM user, choose "IAM user" and enter the
+   account ID / alias, user name and password.
+
+3. In the top-right corner, select a region near you, for example:
+
+       Asia Pacific (Mumbai) ap-south-1
+
+   Use the same region for all steps, otherwise you will not see the
+   instance you created.
+
+4. In the search bar, type EC2 and open the EC2 service.
+
+5. Click "Launch instance".
+
+6. Fill in:
+   - Name: lab-instance-01 (or your roll number)
+   - Application and OS Image (AMI): Ubuntu Server 22.04 LTS (64-bit x86)
+   - Instance type: t2.micro or t3.micro
+     (t2.micro is free-tier eligible on many accounts)
+   - Key pair: click "Create new key pair"
+         Key pair name: lab-key
+         Key pair type: RSA
+         Private key file format: .pem
+     The .pem file downloads to your computer. Keep it safe.
+   - Network settings: allow SSH (port 22) from "My IP".
+     If you also want to open the web page later, allow HTTP (port 80).
+   - Storage: 8 GiB gp3 (default is fine).
+
+7. Click "Launch instance". Wait until the instance state is "Running"
+   and the status checks pass.
+
+8. Select the instance, open the "Details" tab, and copy the
+   "Public IPv4 address" (for example 3.110.45.67).
+
+
+PART B - CONNECT FROM THE UBUNTU TERMINAL
+-----------------------------------------
+1. Open Terminal (Ctrl+Alt+T).
+
+2. Go to the folder where the .pem file was downloaded. Usually:
+
+       cd ~/Downloads
+
+   Check that the file is there:
+
+       ls -l lab-key.pem
+
+3. Give the key the correct permissions (SSH refuses to use a key
+   that is readable by everyone):
+
+       chmod 400 lab-key.pem
+
+4. Connect (replace the IP with your instance's public IP):
+
+       ssh -i lab-key.pem ubuntu@3.110.45.67
+
+   For an Ubuntu AMI the user name is "ubuntu".
+   For Amazon Linux the user name is "ec2-user".
+   For Debian it is "admin".
+
+5. The first time, SSH asks:
+
+       Are you sure you want to continue connecting (yes/no)?
+
+   Type: yes
+
+6. You are now inside the EC2 instance. Try:
+
+       hostname
+       uname -a
+       whoami
+       df -h
+       free -h
+
+7. Optional: install a web server to prove the instance is working:
+
+       sudo apt update
+       sudo apt install -y apache2
+       sudo systemctl status apache2
+
+   Then open this in the browser (if HTTP is allowed in the security
+   group):
+
+       http://3.110.45.67
+
+   You should see the Apache default page.
+
+8. Exit the SSH session:
+
+       exit
+
+
+PART C - STOP OR TERMINATE THE INSTANCE (important)
+---------------------------------------------------
+- "Stop instance" keeps the disk and stops billing for compute.
+- "Terminate instance" permanently deletes the instance and its
+  instance-store data. This cannot be undone.
+
+In the EC2 console:
+   Instance state -> Stop instance   (use this after the lab)
+   Instance state -> Terminate       (only if the teacher says so)
+
+WARNING: A running instance can cost money. Do not leave it running
+after the practical.
+
+
+OPTIONAL - AWS CLI COMMANDS
+----------------------------
+If the AWS CLI is installed, you can inspect and control instances
+from the Ubuntu terminal.
+
+Install (Ubuntu package):
+
+       sudo apt update
+       sudo apt install -y awscli
+
+Configure once with the access key given by the lab:
+
+       aws configure
+       # AWS Access Key ID
+       # AWS Secret Access Key
+       # Default region name: ap-south-1
+       # Default output format: json
+
+Check your identity:
+
+       aws sts get-caller-identity
+
+List your instances:
+
+       aws ec2 describe-instances --region ap-south-1 \
+         --query "Reservations[*].Instances[*].[InstanceId,State.Name,PublicIpAddress]" \
+         --output table
+
+Start / stop / terminate (replace the instance ID):
+
+       aws ec2 start-instances --instance-ids i-0123456789abcdef0 --region ap-south-1
+       aws ec2 stop-instances  --instance-ids i-0123456789abcdef0 --region ap-south-1
+       aws ec2 terminate-instances --instance-ids i-0123456789abcdef0 --region ap-south-1
+
+The AWS CLI is optional. The console is enough for the handout.
+
+
+WHAT TO SCREENSHOT
+------------------
+1. The EC2 dashboard with the running instance.
+2. The instance details (AMI, instance type, public IP).
+3. The SSH terminal showing hostname/uname.
+4. Optional: the Apache page in the browser.
+5. The stopped or terminated state at the end.
+
+Attach the screenshots to Write-up.pdf.
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is Amazon EC2?
+A1. Elastic Compute Cloud: a web service that provides resizable
+    virtual servers (instances) in the AWS cloud.
+
+Q2. What is an instance?
+A2. A virtual server running in the cloud. It has CPU, memory,
+    storage, networking and an operating system.
+
+Q3. What is an AMI?
+A3. Amazon Machine Image: a preconfigured template (OS + software)
+    used to launch an instance.
+
+Q4. What is an instance type?
+A4. A hardware configuration (vCPU, memory, storage, network).
+    Examples: t2.micro, t3.micro, m5.large.
+
+Q5. What is a key pair?
+A5. A public/private key pair used to log in to an instance. AWS keeps
+    the public key; you download and keep the private .pem file.
+
+Q6. What is a security group?
+A6. A virtual firewall that controls inbound and outbound traffic for
+    an instance using rules (port, protocol, source).
+
+Q7. Difference between EBS and instance store?
+A7. EBS is persistent network storage that survives a stop/start.
+    Instance store is temporary local disk storage lost when the
+    instance is stopped or terminated.
+
+Q8. Difference between stop and terminate?
+A8. Stop shuts down the instance but keeps it and its EBS volumes;
+    you can start it again. Terminate permanently deletes the
+    instance (and usually its root EBS volume).
+
+Q9. What is a region and an availability zone?
+A9. A region is a geographic area (e.g., Mumbai). An availability zone
+    is an isolated data-center group inside a region. Instances in
+    different AZs are isolated from each other's failures.
+
+Q10. What are EC2 features?
+A10. Instances, AMIs, instance types, key pairs, security groups,
+     EBS volumes, elastic IPs, auto scaling, load balancing and
+     pay-as-you-go pricing.
+
+Q11. What is the default SSH user for an Ubuntu AMI?
+A11. ubuntu. For Amazon Linux it is ec2-user.
+
+Q12. Why chmod 400 on the .pem file?
+A12. SSH requires the private key to be readable only by the owner.
+     Otherwise it refuses to use the key.
+
+Q13. What is a public IPv4 address?
+A13. The internet-facing address of the instance. It can change when
+     the instance is stopped and started unless you use an Elastic IP.
+
+Q14. What is the difference between EC2 and a physical server?
+A14. EC2 is virtual, elastic (resize/launch quickly), pay-as-you-go,
+     and managed through a web API/console. A physical server is
+     bought, installed and maintained by you.
+
+Q15. What is the shared responsibility model?
+A15. AWS is responsible for the cloud (hardware, network, data
+     centers). The customer is responsible for security in the cloud
+     (OS patches, applications, data, IAM permissions).
+
+
+COMMON PROBLEMS
+---------------
+- "Permission denied (publickey)": wrong user name, wrong key, or the
+  key permissions are too open. Use chmod 400 and ubuntu@IP.
+- "Connection timed out": the security group does not allow SSH from
+  your IP, or the instance is not running.
+- Instance not visible: you are in a different AWS region.
+- No key pair: create one before launching; you cannot download the
+  private key again later.
+- Billing: stop or terminate the instance when finished.

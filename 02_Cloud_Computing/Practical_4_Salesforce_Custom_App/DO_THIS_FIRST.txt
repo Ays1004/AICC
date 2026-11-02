@@ -1,0 +1,417 @@
+============================================================
+CLOUD COMPUTING PRACTICAL 4 - CUSTOM APPLICATION IN SALESFORCE
+============================================================
+
+TITLE (from the handout)
+------------------------
+Design and develop a custom application (mini project) using
+Salesforce Cloud.
+
+OBJECTIVE
+---------
+To develop a custom application using Salesforce Cloud and understand
+custom objects, fields, tabs, relationships and Lightning apps.
+
+PREREQUISITE
+------------
+Salesforce Developer login (the same free Developer Edition org used
+for Practical 3).
+
+FILES IN THIS FOLDER
+--------------------
+Handout.pdf, Write-up.pdf
+Create_Custom_Apps_Classic_Steps.pdf       Salesforce Classic steps
+Salesforce_Custom_Application_Steps.pdf    steps with images
+Objects_Online_Shopping.md                 object design (recommended demo)
+Objects_Accounts_Management.md             alternative design
+Objects_Contact_Management.md              alternative design
+
+You only need to implement ONE app. The steps below use the Online
+Shopping app because it has clear objects and relationships.
+
+If Salesforce says an object or field name is already used in your
+org, add a prefix such as Shopping_ (for example, Shopping_Product)
+and use that same name consistently in the later steps.
+
+
+WHAT YOU ARE BUILDING
+---------------------
+A small "Online Shopping" Lightning app with three custom objects:
+
+    Product__c        product name, description, price, stock, category
+    Customer__c       name, email, phone, address
+    Order_Details__c  order number, date, total amount, status, customer
+
+Then create tabs for the objects and put them in a Lightning app.
+
+
+PART A - OPEN SETUP AND OBJECT MANAGER
+--------------------------------------
+1. Log in to Salesforce:
+
+       https://login.salesforce.com
+
+   From the Ubuntu terminal you can open it with:
+
+       xdg-open https://login.salesforce.com
+
+2. Click the gear icon (Setup) at the top right.
+
+3. In the Quick Find box, type:
+
+       Object Manager
+
+   and open it. You will create the custom objects here.
+
+
+PART B - CREATE THE PRODUCT OBJECT
+----------------------------------
+1. Click "Create" -> "Custom Object".
+
+2. Fill:
+       Label:          Product
+       Plural Label:   Products
+       Object Name:    Product
+       Record Name:    Product Name
+       Data Type:      Text
+       Description:    Product catalogue for the online shopping app
+
+   The API name becomes Product__c automatically.
+
+3. Click Save.
+
+4. Open Product -> Fields & Relationships -> New. Create:
+
+   a) Description
+      Type: Text Area (Long)
+      Field Label: Description
+      Length: 32768 (default)
+
+   b) Price
+      Type: Currency
+      Field Label: Price
+      Decimal Places: 2
+
+   c) Stock_Quantity
+      Type: Number
+      Field Label: Stock Quantity
+      Length: 18, Decimal Places: 0
+
+   d) Category
+      Type: Picklist
+      Field Label: Category
+      Values (one per line):
+          Electronics
+          Clothing
+          Books
+          Home
+          Other
+
+   For each field, accept the defaults and click Save & New (or Save).
+
+
+PART C - CREATE THE CUSTOMER OBJECT
+-----------------------------------
+1. Object Manager -> Create -> Custom Object.
+
+2. Fill:
+       Label:          Customer
+       Plural Label:   Customers
+       Object Name:    Customer
+       Record Name:    Customer Name
+       Data Type:      Text
+
+3. Save.
+
+4. Create fields:
+   a) Email
+      Type: Email
+      Field Label: Email
+
+   b) Phone
+      Type: Phone
+      Field Label: Phone
+
+   c) Address
+      Type: Text Area (Long)
+      Field Label: Address
+
+
+PART D - CREATE THE ORDER OBJECT AND RELATIONSHIP
+-------------------------------------------------
+1. Object Manager -> Create -> Custom Object.
+
+2. Fill:
+       Label:          Order Details
+       Plural Label:   Order Details
+       Object Name:    Order_Details
+       Record Name:    Order Number
+       Data Type:      Auto Number
+       Display Format: ORD-{0000}
+       Starting Number: 1
+
+   The API name becomes Order_Details__c. This avoids confusion with
+   Salesforce's standard Order object. If your org does not have the
+   standard Order object, you may use Order__c instead; just keep the
+   name consistent in the tab and app steps.
+
+3. Save.
+
+4. Create fields:
+   a) Order_Date
+      Type: Date/Time
+      Field Label: Order Date
+
+   b) Total_Amount
+      Type: Currency
+      Field Label: Total Amount
+      Decimal Places: 2
+
+   c) Status
+      Type: Picklist
+      Field Label: Status
+      Values:
+          Pending
+          Shipped
+          Delivered
+          Cancelled
+
+   d) Customer
+      Type: Lookup Relationship
+      Related To: Customer
+      Field Label: Customer
+      Child Relationship Name: Orders
+
+   A Lookup relationship means one customer can have many orders, but
+   an order does not have to have a customer. Use Master-Detail if you
+   want the child record to be deleted when the parent is deleted.
+
+
+PART E - CREATE TABS FOR THE OBJECTS
+------------------------------------
+1. In Setup Quick Find, search for "Tabs" and open it.
+
+2. Under "Custom Object Tabs", click New.
+
+3. Select the object (Product, Customer, Order Details), choose a tab
+   style, and click Next -> Save.
+
+4. Repeat for all three objects.
+
+5. If the tab does not appear in the app, check that the profile has
+   access to the tab (Setup -> Profiles -> System Administrator ->
+   Object Settings / Tab Settings).
+
+
+PART F - CREATE THE LIGHTNING APP
+---------------------------------
+1. In Setup Quick Find, search for "App Manager" and open it.
+
+2. Click "New Lightning App" (top right).
+
+3. App Details:
+       App Name:        Online Shopping
+       Developer Name:  Online_Shopping
+       Description:     Custom online shopping application
+       Branding:        choose a color (logo optional)
+   Click Next.
+
+4. App Options:
+       Navigation Style: Standard
+       (Utility Bar is optional)
+   Click Next.
+
+5. Navigation Items:
+   Add these items from Available to Selected:
+       Home
+       Products
+       Customers
+       Order Details
+   You can reorder them with the up/down arrows.
+   Click Next.
+
+6. Assign to Profiles:
+   Select "System Administrator" (and any other profile that needs it).
+   Click Next -> Save & Finish.
+
+7. Open the App Launcher (9 dots, top left) and search for
+   "Online Shopping". Open it.
+
+8. You should see the tabs: Home, Products, Customers, Order Details.
+
+9. Create test records:
+   - Products tab -> New -> "Laptop", price 55000, stock 10,
+     category Electronics.
+   - Customers tab -> New -> "Rahul Sharma", email, phone, address.
+   - Order Details tab -> New -> order date, total amount, status
+     Pending, customer Rahul Sharma.
+
+10. Open the Customer record and check the related Orders list. The
+    lookup relationship should show the order.
+
+
+IF YOU CHOOSE A DIFFERENT APP
+-----------------------------
+Use one of the other object-design files:
+
+    Objects_Accounts_Management.md
+    Objects_Contact_Management.md
+
+The procedure is the same:
+1. Create the custom objects.
+2. Create the fields and picklists.
+3. Create the lookup/master-detail relationships.
+4. Create tabs.
+5. Create a Lightning app and add the tabs.
+6. Add sample records.
+
+For Accounts Management, you can use the standard Account and Contact
+objects and add custom objects only where needed. That is closer to
+real Salesforce design and avoids duplicating standard objects.
+
+
+WHAT TO SCREENSHOT
+------------------
+1. Object Manager showing the three custom objects.
+2. Fields & Relationships for at least one object.
+3. The custom tabs.
+4. The Lightning app navigation.
+5. Sample records in each tab.
+6. The Customer record showing the related Order Details.
+
+Attach the screenshots to Write-up.pdf. A data-model diagram
+(objects, fields, relationships) is a good addition to the write-up.
+
+
+HOW SALESFORCE CUSTOM APPS WORK (for viva)
+------------------------------------------
+- Object: like a database table. Standard objects are built in
+  (Account, Contact, Opportunity). Custom objects are created by you;
+  their API name ends in __c.
+- Field: like a column. Custom fields end in __c.
+- Record: like a row.
+- Tab: a navigation element that opens an object's list/home page.
+- App: a collection of tabs and utility items that users open from the
+  App Launcher.
+- Lightning: the modern Salesforce UI. Classic is the older UI.
+- Lookup relationship: links two objects; the child can exist without
+  the parent, and deleting the parent does not delete the child.
+- Master-detail relationship: the child is owned by the parent; the
+  parent is required, and deleting it deletes the children.
+- Profile: controls which objects, fields, tabs and apps a user can
+  access.
+- Metadata: the configuration (objects, fields, code, pages) is stored
+  as metadata, which is why Salesforce apps can be deployed between
+  orgs.
+- Multi-tenant: many orgs share the same infrastructure but their data
+  and metadata are isolated.
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is a custom application in Salesforce?
+A1. An app built from standard/custom objects, fields, tabs, pages and
+    automation to solve a specific business need. It appears in the
+    App Launcher.
+
+Q2. Difference between a standard and a custom object?
+A2. Standard objects are provided by Salesforce (Account, Contact).
+    Custom objects are created by the developer and have API names
+    ending in __c.
+
+Q3. What is an object, a field and a record?
+A3. Object = table, field = column, record = row.
+
+Q4. What is a tab?
+A4. A navigation item that opens an object's home/list page. Custom
+    object tabs are created in Setup -> Tabs.
+
+Q5. What is the App Launcher?
+A5. The 9-dot menu that lets users open Salesforce apps.
+
+Q6. Difference between Lookup and Master-Detail?
+A6. Lookup: optional link; deleting the parent does not delete the
+    child. Master-Detail: required link; the child is owned by the
+    parent and is deleted with it; it also supports roll-up summary
+    fields.
+
+Q7. What is a picklist?
+A7. A field with a fixed list of allowed values. It reduces invalid
+    data entry.
+
+Q8. What is an Auto Number field?
+A8. A read-only field that Salesforce fills with a sequential number
+    using a display format, e.g. ORD-{0000}.
+
+Q9. What is a profile?
+A9. A collection of permissions that controls what a user can see and
+    do: objects, fields, tabs, apps and system permissions.
+
+Q10. What is a permission set?
+A10. An additional set of permissions assigned to users on top of
+     their profile, useful for giving extra access without changing
+     the profile.
+
+Q11. Lightning vs Classic?
+A11. Lightning is the modern component-based UI; Classic is the older
+     page-based UI. This practical uses Lightning.
+
+Q12. What is a sandbox?
+A12. A copy of the org for development/testing. Changes can be tested
+     there and then deployed to production.
+
+Q13. What is a change set?
+A13. A container of metadata components used to deploy changes from
+     one org (e.g. sandbox) to another.
+
+Q14. What is the Salesforce data model?
+A14. The set of objects, fields and relationships. Account is the
+     parent of Contact and Opportunity; a Lookup or Master-Detail
+     field defines the relationship.
+
+Q15. What is multi-tenancy?
+A15. Many customers share the same application infrastructure, while
+     their data and metadata are logically separated.
+
+Q16. What is the difference between a page layout and a record type?
+A16. A page layout controls the fields shown on a record page. A record
+     type controls which page layout and picklist values apply to a
+     particular kind of record.
+
+Q17. Why use a custom app instead of one big object?
+A17. Separation of concerns, better navigation, cleaner permissions,
+     and a data model that reflects the business.
+
+Q18. Can you create a relationship between two custom objects?
+A18. Yes. Use a Lookup or Master-Detail field. Master-Detail requires
+     the child object to have a parent; a custom object can have up to
+     two master-detail relationships.
+
+Q19. What is a roll-up summary?
+A19. A field on a parent object that calculates COUNT, SUM, MIN or MAX
+     over related child records in a Master-Detail relationship.
+
+Q20. What is the difference between a profile and a role?
+A20. A profile controls permissions (what you can do). A role controls
+     record-level visibility in the role hierarchy (whose records you
+     can see).
+
+
+COMMON PROBLEMS
+---------------
+- Cannot find "Custom Object": you are not in Object Manager, or your
+  profile lacks permission. Use the System Administrator account.
+- API name already used: choose a different label/name.
+- Custom object tab missing: create the tab in Setup -> Tabs, then add
+  it to the app's navigation items.
+- Cannot add a tab to the app: create the tab first; then edit the app.
+- Picklist value not accepted: check the exact spelling and case.
+- Lookup field missing: create the field on the child object and select
+  the parent object as "Related To".
+- App not visible in App Launcher: check the profile assignment and
+  refresh the page.
+- Changes not visible: Lightning caches the app; refresh the browser or
+  log out and back in.
+- In Classic, use Setup -> Create -> Objects and Setup -> Create ->
+  Apps; the steps are similar but the menus differ. See
+  Create_Custom_Apps_Classic_Steps.pdf.

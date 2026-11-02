@@ -1,0 +1,187 @@
+============================================================
+PRACTICAL 4 - N-QUEENS (CONSTRAINT SATISFACTION)
+  Backtracking / Branch and Bound
+============================================================
+
+PROBLEM STATEMENT (from the handout)
+------------------------------------
+Implement a solution for a Constraint Satisfaction Problem using
+Branch and Bound and Backtracking for the n-queens problem or a
+graph coloring problem.
+
+This folder contains the n-queens solution (recommended) and a graph
+coloring program as the alternative.
+
+FILES IN THIS FOLDER
+--------------------
+code/main.py                n-queens using backtracking
+code/graph_coloring.py      graph coloring (alternative problem)
+code/my_simple_n_queens.py  simpler class-based n-queens version
+Handout.pdf, Write-up.pdf
+sample_input.txt            input for the demo (4 queens)
+sample_output.txt           exact output of the demo
+
+
+STEP-BY-STEP IN THE UBUNTU LAB
+------------------------------
+1. Open Terminal (Ctrl+Alt+T).
+2. Find the pendrive name:
+
+       ls /media/$USER
+
+3. Go to the code folder (replace MYUSB):
+
+       cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_4_N_Queens/code"
+
+4. Run:
+
+       python3 main.py
+
+5. Enter the number of queens:
+
+       4
+
+6. The program prints one valid board. Q is a queen, . is empty.
+
+7. To run automatically:
+
+       python3 main.py < ../sample_input.txt
+
+8. Try 8 queens as well:
+
+       8
+
+9. Alternative (graph coloring, no input):
+
+       python3 graph_coloring.py
+
+
+WHAT YOU SHOULD SEE
+-------------------
+For 4 queens, one valid solution is:
+
+       . Q . .
+       . . . Q
+       Q . . .
+       . . Q .
+
+For 8 queens, the program prints a valid 8x8 board with one queen
+in every row and every column.
+
+The program prints the first solution it finds. It does not print
+all solutions, because placeQueens() returns True as soon as a
+complete board is reached.
+
+For n = 2 or n = 3, no solution exists and the program prints:
+
+       No solution exists.
+
+
+HOW THE CODE WORKS (for viva)
+-----------------------------
+This is a Constraint Satisfaction Problem (CSP):
+
+       Variables : the rows 0 .. n-1
+       Domain    : the column for each queen, 0 .. n-1
+       Constraints:
+         - one queen per column
+         - no two queens on the same diagonal
+
+The algorithm places queens row by row:
+
+1. Start with row i = 0.
+2. Try every column j from 0 to n-1.
+3. Check whether column j and both diagonals are free.
+4. If safe, place the queen:
+       cols[j] = 1
+       rightDiagonal[i + j] = 1
+       leftDiagonal[i - j + n - 1] = 1
+       cur.append(j)
+5. Recurse to row i + 1.
+6. If no column works, undo the choice (backtrack):
+       cur.pop()
+       reset the three arrays
+7. If i == n, all n queens are placed: return True.
+
+Why the diagonal arrays work:
+- Cells on the same "right" diagonal have the same i + j.
+- Cells on the same "left" diagonal have the same i - j + n - 1.
+  The + n - 1 shifts the value so it is a valid array index.
+
+Branch and bound / pruning:
+- The algorithm does not build all n^n boards. As soon as a partial
+  placement violates a constraint, that whole branch is abandoned.
+  This pruning is the "bound" that makes backtracking practical.
+
+Time complexity: O(n!) in the worst case. Space: O(n).
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is a Constraint Satisfaction Problem?
+A1. A problem defined by variables, domains and constraints. A
+    solution assigns a value to every variable without violating any
+    constraint. N-queens is a classic CSP.
+
+Q2. What are the variables, domains and constraints in n-queens?
+A2. Variables: rows (or queens). Domain: columns 0..n-1. Constraints:
+    no two queens share a column or a diagonal.
+
+Q3. What is backtracking?
+A3. A depth-first search that builds a solution incrementally and
+    undoes the last choice when it cannot proceed.
+
+Q4. What is branch and bound?
+A4. A search that prunes branches which cannot lead to a better
+    solution. In n-queens, an attacked column/diagonal prunes the
+    branch immediately.
+
+Q5. Why are three arrays used?
+A5. cols[j] records whether column j is occupied. The two diagonal
+    arrays record whether a diagonal is occupied. This makes each
+    safety check O(1).
+
+Q6. Why is i - j + n - 1 used?
+A6. i - j can be negative. Adding n - 1 makes it a valid index from
+    0 to 2n - 2.
+
+Q7. How many solutions does 4-queens have?
+A7. Two distinct solutions (and their mirror images depending on how
+    you count). This program prints the first one it finds.
+
+Q8. How many solutions does 8-queens have?
+A8. 92 solutions.
+
+Q9. What is the time complexity?
+A9. O(n!) in the worst case, but pruning makes it much faster in
+    practice.
+
+Q10. Why does n = 2 or n = 3 have no solution?
+A10. There is no way to place that many queens without two attacking
+     each other. The constraints cannot all be satisfied.
+
+Q11. How is graph coloring similar?
+A11. Variables are vertices, domains are colors, and the constraint is
+     that adjacent vertices must have different colors. It is also
+     solved by backtracking.
+
+Q12. What is the difference between n-queens and graph coloring?
+A12. N-queens places queens on a board with column/diagonal
+     constraints. Graph coloring assigns colors to vertices with
+     edge constraints. Both are CSPs solved by backtracking.
+
+
+COMMON MISTAKES
+---------------
+- Entering 0 or a negative number. Use n >= 1.
+- Expecting a solution for n = 2 or n = 3. There is none.
+- Expecting all solutions. The program stops at the first one.
+- Confusing rows and columns when reading the board. Each row has
+  exactly one Q.
+- Forgetting to reset the arrays after a failed branch; that is what
+  the pop/reset lines do.
+
+AFTER THE PRACTICAL
+-------------------
+Screenshot the 4-queens board and the 8-queens board. In the write-up,
+draw the 4x4 board and mark the column/diagonal constraints.

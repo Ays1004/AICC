@@ -1,0 +1,5 @@
+Enter number of vertices: Enter vertex names (e.g., A B C ...):
+Enter number of edges: Enter edges (format: source destination weight):
+Enter heuristic values (e.g., A 4 B 2 ...):
+Enter start vertex: Enter goal vertex: Path cost: 7
+Optimal path: A -> B -> C -> D -> E

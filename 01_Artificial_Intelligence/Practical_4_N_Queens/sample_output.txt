@@ -1,0 +1,4 @@
+Enter the number of queens:	. Q . .
+. . . Q
+Q . . .
+. . Q .

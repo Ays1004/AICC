@@ -1,0 +1,42 @@
+
+
+ ---------- MAIN MENU ----------
+1. Selection Sort
+2. Job Scheduling
+3. Exit
+Choose an option (1-3):	--------------------------------
+
+How many numbers do you wish to enter?
+Total numbers:	Enter number 1:	Enter number 2:	Enter number 3:	Enter number 4:	Enter number 5:	
+Numbers you've entered are:	 [30.0, 10.0, 50.0, 20.0, 40.0]
+Numbers sorted in ascending order using selection sort:	 [10.0, 20.0, 30.0, 40.0, 50.0]
+
+
+ ---------- MAIN MENU ----------
+1. Selection Sort
+2. Job Scheduling
+3. Exit
+Choose an option (1-3):	--------------------------------
+Total jobs to add:	
+ ---------- JOBS ---------- 
+
+JOB 1 ->
+ID for job 1:		Deadline for job 1:	Profit for job 1:	JOB 2 ->
+ID for job 2:		Deadline for job 2:	Profit for job 2:	JOB 3 ->
+ID for job 3:		Deadline for job 3:	Profit for job 3:	JOB 4 ->
+ID for job 4:		Deadline for job 4:	Profit for job 4:	
+Added 4 jobs.
+--------------------------- 
+
+Scheduled Jobs: 4 3 
+Total Profit: 70
+
+
+ ---------- MAIN MENU ----------
+1. Selection Sort
+2. Job Scheduling
+3. Exit
+Choose an option (1-3):	--------------------------------
+
+## END OF CODE
+

@@ -1,0 +1,191 @@
+============================================================
+PRACTICAL 2 - A* ALGORITHM FOR THE 8-PUZZLE PROBLEM
+============================================================
+
+PROBLEM STATEMENT (from the handout)
+------------------------------------
+To solve the 8-puzzle problem using the A* algorithm. Assume any
+initial configuration and define the goal configuration clearly.
+
+Goal configuration used by the program:
+
+       1  2  3
+       4  5  6
+       7  8  0
+
+0 represents the blank tile.
+
+FILES IN THIS FOLDER
+--------------------
+code/main.py                    recommended 8-puzzle program
+code/alternative_maze.py        A* on a maze (another game search problem)
+code/alternative_generic_graph.py  A* on a weighted graph using heuristics
+code/my_simple_8_puzzle.py      simpler hard-coded 8-puzzle version
+Handout.pdf, Write-up.pdf
+sample_input.txt                input for the demo below
+sample_output.txt               exact output of the demo
+sample_input_maze.txt           input for the maze alternative
+sample_input_generic_graph.txt  input for the graph alternative
+
+
+STEP-BY-STEP IN THE UBUNTU LAB
+------------------------------
+1. Open Terminal (Ctrl+Alt+T).
+
+2. Find the pendrive name:
+
+       ls /media/$USER
+
+3. Go to the code folder (replace MYUSB with the real name):
+
+       cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_2_A_Star_8_Puzzle/code"
+
+   Shortcut: open the "code" folder in Files, right-click, and choose
+   "Open in Terminal".
+
+4. Run:
+
+       python3 main.py
+
+5. Enter the initial state as three rows. Type exactly:
+
+       1 2 3
+       0 4 6
+       7 5 8
+
+   Press Enter after each row. There are three numbers per row,
+   separated by spaces.
+
+6. The program prints the steps from the initial state to the goal.
+
+7. To run the demo automatically:
+
+       python3 main.py < ../sample_input.txt
+
+8. Optional alternatives:
+
+       python3 alternative_maze.py < ../sample_input_maze.txt
+
+       python3 alternative_generic_graph.py < ../sample_input_generic_graph.txt
+
+
+WHAT YOU SHOULD SEE
+-------------------
+Step 0:
+[1, 2, 3]
+[0, 4, 6]
+[7, 5, 8]
+
+Step 1:
+[1, 2, 3]
+[4, 0, 6]
+[7, 5, 8]
+
+Step 2:
+[1, 2, 3]
+[4, 5, 6]
+[7, 0, 8]
+
+Step 3:
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 0]
+
+The goal is reached in 3 moves.
+
+
+HOW THE CODE WORKS (for viva)
+-----------------------------
+A* chooses the node with the smallest value of:
+
+       f(n) = g(n) + h(n)
+
+       g(n) = cost from the start node to node n
+              (number of moves made so far)
+       h(n) = estimated cost from n to the goal
+              (here: number of misplaced tiles)
+       f(n) = estimated total cost of the path through n
+
+- OPEN list: a min-heap (heapq) of nodes that have been generated
+  but not expanded. The smallest f is popped first.
+- CLOSED set: states already expanded, so the same state is not
+  processed again.
+- find_blank() locates the 0 tile.
+- The blank can move up, down, left or right inside the 3x3 grid.
+- Swapping the blank with a neighbour creates a new state.
+- state_to_tuple() converts the list-of-lists into a tuple so it can
+  be stored in a set (lists are not hashable).
+- The path is printed when the goal state is popped.
+
+Why is A* optimal?
+Because the heuristic (misplaced tiles) never overestimates the true
+remaining cost; it is admissible. With an admissible heuristic, A*
+finds an optimal solution.
+
+Time complexity is exponential in the depth of the solution in the
+worst case. Space is also exponential because states are stored.
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is A*?
+A1. A best-first search that uses f(n) = g(n) + h(n) to choose the
+    next node. It combines the actual path cost with a heuristic
+    estimate.
+
+Q2. What is an admissible heuristic?
+A2. A heuristic that never overestimates the real cost to the goal.
+    The misplaced-tiles heuristic is admissible.
+
+Q3. Which heuristic is used here?
+A3. Number of misplaced tiles (excluding the blank). Another common
+    heuristic is the Manhattan distance.
+
+Q4. What are OPEN and CLOSED lists?
+A4. OPEN holds generated but unexpanded nodes. CLOSED holds states
+    that have already been expanded.
+
+Q5. Why is the blank represented by 0?
+A5. It is a convenient sentinel. The blank is not a tile; 0 marks the
+    empty position.
+
+Q6. Is every 8-puzzle configuration solvable?
+A6. No. For a 3x3 puzzle, count the inversions. If the number of
+    inversions is odd, the state is unsolvable. The program will print
+    "No solution found" for such a state.
+
+Q7. Difference between A* and greedy best-first search?
+A7. Greedy best-first uses only h(n). A* uses g(n) + h(n), so it
+    accounts for the cost already paid and is optimal with an
+    admissible heuristic.
+
+Q8. What is the branching factor here?
+A8. At most 4 (the blank can move up, down, left or right); at the
+    edges and corners it is less.
+
+Q9. What is the role of the priority queue?
+A9. It always gives the node with the smallest f first. heapq is a
+    min-heap implementation.
+
+Q10. How would you change the goal state?
+A10. Edit the goal_state matrix at the top of main.py. Make sure the
+     initial state is still solvable.
+
+
+COMMON MISTAKES
+---------------
+- Entering fewer than three numbers in a row. The program expects
+  three integers per row.
+- Using a number outside 0-8, or repeating a number. The input should
+  be a permutation of 0..8.
+- Forgetting that 0 is the blank, not a tile with value zero.
+- Entering an unsolvable state and expecting a path. The program
+  correctly reports that no solution exists.
+- The generic graph alternative requires weights and a heuristic for
+  every vertex; read its prompts carefully.
+
+AFTER THE PRACTICAL
+-------------------
+Screenshot the initial state, the step-by-step output, and the final
+goal state. In the write-up, write the f = g + h formula and explain
+the misplaced-tiles heuristic.

@@ -1,0 +1,225 @@
+============================================================
+PRACTICAL 5 - ELEMENTARY CHATBOT
+============================================================
+
+PROBLEM STATEMENT
+-----------------
+The repository README states:
+"Develop an elementary chatbot for any suitable customer
+interaction application."
+
+The printed handout in this folder states:
+"Develop an elementary chatbot for suggesting investment as per the
+customer needs."
+
+Both are covered:
+- code/main.py                restaurant customer-service chatbot
+- code/investment_chatbot.py  investment-advisor chatbot (matches the
+                              printed handout wording)
+- code/alternative_nltk_chat.py  NLTK pattern-matching chatbot (optional)
+
+Use main.py for the standard demo, or investment_chatbot.py if your
+examiner asks specifically for investment suggestions.
+
+FILES IN THIS FOLDER
+--------------------
+code/main.py                      restaurant chatbot (recommended)
+code/investment_chatbot.py        investment chatbot (handout version)
+code/alternative_nltk_chat.py     NLTK-based chatbot (needs pip install)
+code/my_simple_chatbot.py         simpler dictionary-based chatbot
+Handout.pdf, Write-up.pdf
+sample_input.txt                  conversation for main.py
+sample_output.txt                 exact output for main.py
+sample_input_investment.txt       conversation for investment_chatbot.py
+sample_output_investment.txt      exact output for investment_chatbot.py
+
+
+STEP-BY-STEP IN THE UBUNTU LAB (RESTAURANT CHATBOT)
+---------------------------------------------------
+1. Open Terminal (Ctrl+Alt+T).
+2. Find the pendrive name:
+
+       ls /media/$USER
+
+3. Go to the code folder (replace MYUSB):
+
+       cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_5_Chatbot/code"
+
+4. Run:
+
+       python3 main.py
+
+5. Type a message and press Enter. Try:
+
+       menu
+       what is the cost
+       contact
+       book a table
+       hours
+       date
+       how are you
+       exit
+
+6. To run the same conversation automatically:
+
+       python3 main.py < ../sample_input.txt
+
+7. To stop at any time, type:
+
+       exit
+
+   (or press Ctrl+C).
+
+
+STEP-BY-STEP FOR THE INVESTMENT CHATBOT (HANDOUT VERSION)
+---------------------------------------------------------
+1. In the same code folder, run:
+
+       python3 investment_chatbot.py
+
+2. Try:
+
+       hello
+       savings
+       fd
+       mutual funds
+       stocks
+       risk
+       tax
+       short term
+       long term
+       date
+       help
+       exit
+
+3. Automatic demo:
+
+       python3 investment_chatbot.py < ../sample_input_investment.txt
+
+
+WHAT YOU SHOULD SEE (RESTAURANT CHATBOT)
+----------------------------------------
+Welcome to the K's Restaurant!
+You can ask me about the menu, cost, contact details or reservations!
+
+You: menu
+Chatbot: Our menu includes pasta, pizza, salads, and desserts.
+
+You: what is the cost
+Chatbot: The average cost per person is around $20.
+
+You: contact
+Chatbot: You can contact us at +91-1234567890
+
+You: book a table
+Chatbot: To make a reservation, please call us at +91-1234567890 or visit our website at https://k-rest.io
+
+You: hours
+Chatbot: We are open from 11 AM to 10 PM, Monday to Sunday.
+
+You: date
+Chatbot: Today's date and time is ...
+
+You: how are you
+Chatbot: I'm just a bot, but I'm here to help you! How can I assist you today?
+
+You: exit
+Chatbot: Thank you for chatting with us! Have a great day!
+
+(Your exact date/time will be different.)
+
+
+HOW THE CODE WORKS (for viva)
+-----------------------------
+This is a rule-based / retrieval-based chatbot. It does not use a
+trained machine-learning model.
+
+- The program reads the user's message and converts it to lowercase.
+- It checks for keywords with the "in" operator:
+      if "menu" in user_input: ...
+      elif "cost" in user_input or "price" in user_input: ...
+- The first matching rule produces the response.
+- If no rule matches, a fallback response is printed.
+- "exit", "quit" or "bye" ends the loop.
+- datetime is used for the date/time response.
+
+The investment version works the same way, with keywords such as
+savings, FD, mutual funds, stocks, risk, tax and time horizon.
+
+The NLTK alternative uses regular-expression patterns:
+      Chat(pairs, reflections)
+      chat.converse()
+It is still pattern matching, not a neural network. It needs:
+
+      pip3 install nltk
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is a chatbot?
+A1. A software application that simulates a conversation with a user
+    through text or voice.
+
+Q2. What are the types of chatbots?
+A2. Text-based and voice-based; rule-based (retrieval) and
+    machine-learning / generative chatbots. This practical builds a
+    rule-based text chatbot.
+
+Q3. How does this chatbot understand the user?
+A3. It performs keyword matching on the lowercased input string. It
+    does not parse grammar or understand meaning.
+
+Q4. What is NLP?
+A4. Natural Language Processing: the field of AI concerned with
+    enabling computers to understand, interpret and generate human
+    language.
+
+Q5. What are the limitations of a rule-based chatbot?
+A5. It only handles phrases anticipated by the programmer. It cannot
+    generalize to unseen wording and has no real language
+    understanding.
+
+Q6. How would you improve it?
+A6. Use intent classification (TF-IDF + classifier), word embeddings,
+    or an LLM API. Add context tracking and a larger knowledge base.
+
+Q7. What is NLTK?
+A7. The Natural Language Toolkit, a Python library for NLP tasks such
+    as tokenization, stemming, tagging and chatbot pattern matching.
+
+Q8. What is the difference between a rule-based and an ML chatbot?
+A8. Rule-based: hand-written if/else or regex rules. ML: learns
+    patterns from training data and can generalize to new phrasing.
+
+Q9. Why is input converted to lowercase?
+A9. So "Menu", "MENU" and "menu" all match the same keyword.
+
+Q10. How does the program end?
+A10. The while loop breaks when the input contains "exit", "quit" or
+     "bye".
+
+Q11. What is a fallback response?
+A11. The default reply when no rule matches, e.g. "I'm sorry, I didn't
+     understand that."
+
+Q12. Is this chatbot using AI?
+A12. It is a simple symbolic AI / rule-based system. It does not learn
+     from data.
+
+
+COMMON MISTAKES
+---------------
+- Running alternative_nltk_chat.py without installing NLTK. Use
+  main.py if the lab has no internet.
+- Typing "Exit" with a capital E: it still works because the input is
+  lowercased.
+- Expecting the chatbot to answer arbitrary questions. It only knows
+  the programmed keywords.
+- For the NLTK version, if pip install fails, do not waste time; use
+  main.py.
+
+AFTER THE PRACTICAL
+-------------------
+Screenshot a conversation showing at least four different responses
+and the exit message. In the write-up, list the keywords and the
+response for each one.

@@ -1,0 +1,232 @@
+============================================================
+PRACTICAL 3 - GREEDY SEARCH ALGORITHM
+  Option I  : Selection Sort
+  Option IV : Job Scheduling Problem
+============================================================
+
+PROBLEM STATEMENT (from the handout)
+------------------------------------
+Implement a Greedy search algorithm for any of the following:
+  I.   Selection Sort
+  II.  Minimum Spanning Tree
+  III. Single-Source Shortest Path Problem
+  IV.  Job Scheduling Problem
+  V.   Prim's Minimal Spanning Tree Algorithm
+  VI.  Kruskal's Minimum Spanning Tree Algorithm
+  VII. Dijkstra's algorithm
+
+The recommended program implements Option I and Option IV, which is
+what the repository's main Assignment-A3.py does.
+
+FILES IN THIS FOLDER
+--------------------
+code/main.py                            selection sort + job scheduling
+code/only_selection_sort.py             selection sort only
+code/only_job_scheduling.py             job scheduling only
+code/alternative_prim_mst_combined.py   selection sort + Prim's MST
+code/alternative_prim_mst_only.py       Prim's MST only
+code/my_simple_selection_sort.py        simpler menu version
+code/my_simple_prims_mst.py             simpler Prim's MST with labels
+Handout.pdf, Write-up.pdf
+sample_input.txt                        input for the demo below
+sample_output.txt                       exact output of the demo
+
+
+STEP-BY-STEP IN THE UBUNTU LAB
+------------------------------
+1. Open Terminal (Ctrl+Alt+T).
+2. Find the pendrive name:
+
+       ls /media/$USER
+
+3. Go to the code folder (replace MYUSB):
+
+       cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_3_Greedy_Search/code"
+
+4. Run:
+
+       python3 main.py
+
+5. The main menu has three choices. To demonstrate both algorithms,
+   use this sequence (press Enter after every value):
+
+       1        <- Selection Sort
+       5        <- how many numbers
+       30
+       10
+       50
+       20
+       40
+       2        <- Job Scheduling
+       4        <- how many jobs
+       1        <- job ID 1
+       2        <- deadline of job 1
+       10       <- profit of job 1
+       2        <- job ID 2
+       1        <- deadline of job 2
+       20       <- profit of job 2
+       3        <- job ID 3
+       2        <- deadline of job 3
+       30       <- profit of job 3
+       4        <- job ID 4
+       1        <- deadline of job 4
+       40       <- profit of job 4
+       3        <- Exit
+
+6. To run the same demo automatically:
+
+       python3 main.py < ../sample_input.txt
+
+7. Optional: run only one algorithm:
+
+       python3 only_selection_sort.py
+
+       python3 only_job_scheduling.py
+
+8. Optional: Prim's MST (uses 999 for "no edge"):
+
+       python3 alternative_prim_mst_only.py
+
+   Sample graph input for 6 vertices:
+
+       1
+       6
+       999 7 8 999 999 999
+       7 999 3 6 999 999
+       8 3 999 4 3 999
+       999 6 4 999 2 5
+       999 999 3 2 999 2
+       999 999 999 5 2 999
+       2
+       3
+
+   Expected MST edges:
+       0-1 : 7
+       1-2 : 3
+       2-4 : 3
+       4-3 : 2
+       4-5 : 2
+       Total weight = 17
+
+   Ready-made input/output for this alternative:
+       sample_input_prim_only.txt / sample_output_prim_only.txt
+       sample_input_prim_combined.txt / sample_output_prim_combined.txt
+
+
+WHAT YOU SHOULD SEE FOR THE DEMO
+--------------------------------
+Selection sort:
+
+       Numbers entered: [30.0, 10.0, 50.0, 20.0, 40.0]
+       Sorted:          [10.0, 20.0, 30.0, 40.0, 50.0]
+
+Job scheduling:
+
+       Scheduled Jobs: 4 3
+       Total Profit: 70
+
+Why jobs 4 and 3?
+- Jobs sorted by profit: 40 (deadline 1), 30 (deadline 2),
+  20 (deadline 1), 10 (deadline 2).
+- Job 4 gets slot 1; job 3 gets slot 2.
+- Jobs 2 and 1 cannot be scheduled because their deadlines are
+  already filled.
+- Total profit = 40 + 30 = 70.
+
+
+HOW THE CODE WORKS (for viva)
+-----------------------------
+Selection Sort:
+- Find the smallest element in the unsorted part of the list.
+- Swap it with the first unsorted element.
+- Move the boundary one position to the right.
+- Repeat until the whole list is sorted.
+- Time complexity: O(n^2) comparisons, O(1) extra space.
+- It is not stable by default (the simple swap version shown here).
+
+Job Scheduling (greedy with deadlines and profits):
+- Each job takes one unit of time and has a deadline and profit.
+- Sort jobs in decreasing order of profit.
+- For each job, find the latest free time slot before its deadline.
+- If a slot is free, schedule the job there and add its profit.
+- This greedy choice is optimal for unit-time jobs with deadlines
+  and profits.
+- The slots array stores which job ID occupies each time slot.
+
+Greedy strategy:
+- Make the locally best choice at every step and never undo it.
+- Greedy is not always optimal for every problem, but it is optimal
+  for selection sort, Prim's MST, Dijkstra and this job-scheduling
+  variant.
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is a greedy algorithm?
+A1. An algorithm that builds a solution step by step, choosing the
+    best option available at each step, without backtracking.
+
+Q2. Why is selection sort greedy?
+A2. At each pass it selects the minimum remaining element and puts it
+    in its final position. That is a locally optimal choice.
+
+Q3. Time complexity of selection sort?
+A3. O(n^2) in all cases (best, average, worst). Space is O(1).
+
+Q4. Is selection sort stable?
+A4. The simple swap version is not stable. Equal elements can change
+    relative order.
+
+Q5. What is the greedy criterion in job scheduling?
+A5. Pick the job with the highest profit first, then place it in the
+    latest available slot before its deadline.
+
+Q6. Why process jobs by profit and not by deadline?
+A6. Profit is the objective being maximized. Deadline only restricts
+    where the job can be placed.
+
+Q7. What is the time complexity of this job scheduling?
+A7. Sorting is O(n log n); placing jobs can take O(n * max_deadline)
+    in the simple implementation.
+
+Q8. What is a Minimum Spanning Tree?
+A8. A subset of edges that connects all vertices with minimum total
+    edge weight and no cycles. Prim's and Kruskal's are greedy MST
+    algorithms.
+
+Q9. Difference between Prim's and Kruskal's?
+A9. Prim's grows one tree from a starting vertex and adds the cheapest
+    edge connecting the tree to a new vertex. Kruskal's sorts all
+    edges and adds the cheapest edge that does not form a cycle.
+
+Q10. Difference between greedy and dynamic programming?
+A10. Greedy makes one irreversible local choice; DP explores
+     subproblems and combines optimal solutions. Greedy is faster but
+     is not correct for every problem.
+
+Q11. Where is Dijkstra's algorithm used?
+A11. Single-source shortest path on a weighted graph with
+     non-negative edge weights. It is also greedy.
+
+Q12. What does 999 mean in the Prim's code?
+A12. It is used as "infinity" / no edge between two vertices. The
+     code skips 999 entries.
+
+
+COMMON MISTAKES
+---------------
+- Entering job ID, deadline and profit on one line. Enter one value
+  per line.
+- Using a deadline larger than the number of jobs; the slots array
+  becomes bigger but still works.
+- Confusing job ID with deadline. The order is ID, deadline, profit.
+- In Prim's alternative, using 0 for "no edge". That code expects 999.
+  (The simpler my_simple_prims_mst.py uses 0 instead.)
+- Running selection sort twice in the original repository code mixes
+  old and new numbers. This copy clears the list first.
+
+AFTER THE PRACTICAL
+-------------------
+Screenshot the sorted numbers, the scheduled jobs and the total
+profit. For the write-up, include the greedy criterion for each
+algorithm.

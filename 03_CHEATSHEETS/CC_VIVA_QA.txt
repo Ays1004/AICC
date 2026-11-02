@@ -1,0 +1,297 @@
+============================================================
+CLOUD COMPUTING - VIVA QUESTION BANK
+============================================================
+
+CLOUD BASICS
+------------
+Q1. What is cloud computing?
+A1. On-demand delivery of computing resources (servers, storage,
+    databases, software, networking) over the internet with
+    pay-as-you-go pricing.
+
+Q2. What are the essential characteristics of cloud computing?
+A2. On-demand self-service, broad network access, resource pooling,
+    rapid elasticity and measured service.
+
+Q3. What are the service models?
+A3. IaaS (infrastructure: VMs, storage), PaaS (platform: runtime,
+    database), SaaS (software: Gmail, Salesforce).
+
+Q4. What are the deployment models?
+A4. Public, private, hybrid and community cloud.
+
+Q5. IaaS vs PaaS vs SaaS?
+A5. IaaS gives raw infrastructure; you manage the OS and app. PaaS
+    gives a managed platform; you manage only the app. SaaS gives a
+    ready application; you just use it.
+
+Q6. What is virtualization?
+A6. Creating virtual versions of physical resources so multiple
+    isolated virtual machines/containers can share one physical host.
+
+Q7. What is a hypervisor?
+A7. Software that creates and manages virtual machines and allocates
+    physical resources to them.
+
+Q8. Type 1 vs type 2 hypervisor?
+A8. Type 1 runs directly on hardware (KVM, ESXi, Hyper-V). Type 2 runs
+    on a host OS (VirtualBox, VMware Workstation).
+
+Q9. What is a virtual machine?
+A9. A software emulation of a computer with virtual CPU, memory, disk,
+    network and its own guest OS.
+
+Q10. VM vs container?
+A10. A VM has its own guest kernel and full OS; a container shares the
+     host kernel and packages the app plus user-space libraries. Containers
+     are lighter and start faster; VMs are more isolated.
+
+Q11. What is multi-tenancy?
+A11. Multiple customers share the same infrastructure while their data
+     and configuration are logically isolated.
+
+Q12. What is elasticity?
+A12. The ability to scale resources up/down or out/in automatically
+     with demand.
+
+Q13. What is measured service?
+A13. Usage is metered, and the customer pays for what is consumed.
+
+Q14. What is a region and an availability zone?
+A14. A region is a geographic area; an AZ is an isolated data-center
+     group inside a region. Multiple AZs provide fault tolerance.
+
+Q15. What is the shared responsibility model?
+A15. The provider secures the cloud infrastructure; the customer
+     secures what runs in the cloud (data, identities, OS patches,
+     app configuration).
+
+PRACTICAL 1 - AMAZON EC2
+------------------------
+Q16. What is Amazon EC2?
+A16. Elastic Compute Cloud: resizable virtual servers (instances) in
+     AWS with pay-as-you-go pricing.
+
+Q17. What is an AMI?
+A17. Amazon Machine Image: a template containing the OS and software
+     used to launch an instance.
+
+Q18. What is an instance type?
+A18. A hardware configuration: vCPU, memory, storage and network
+     capacity. Examples: t2.micro, t3.micro, m5.large.
+
+Q19. What is a key pair?
+A19. A public/private key pair used for SSH login. AWS stores the
+     public key; the user keeps the private .pem file.
+
+Q20. What is a security group?
+A20. A stateful virtual firewall controlling inbound/outbound traffic
+     by port, protocol and source.
+
+Q21. EBS vs instance store?
+A21. EBS is persistent network block storage; instance store is
+     temporary local disk lost on stop/terminate.
+
+Q22. Stop vs terminate?
+A22. Stop shuts down but keeps the instance and EBS volumes; terminate
+     permanently deletes the instance.
+
+Q23. What is an Elastic IP?
+A23. A static public IPv4 address that can be associated with an
+     instance and does not change on stop/start.
+
+Q24. What is the default SSH user for Ubuntu/Amazon Linux?
+A24. ubuntu for Ubuntu AMIs; ec2-user for Amazon Linux.
+
+Q25. Why chmod 400 on the .pem file?
+A25. SSH requires the private key to be readable only by the owner.
+
+Q26. What is user data in EC2?
+A26. A script that runs automatically the first time an instance
+     boots, often used to install software.
+
+Q27. What is auto scaling?
+A27. Automatically launching/terminating instances based on demand
+     using a launch template and scaling policy.
+
+Q28. What is an Elastic Load Balancer?
+A28. Distributes incoming traffic across multiple targets/instances
+     for availability and scalability.
+
+PRACTICAL 2 - KVM
+-----------------
+Q29. What is KVM?
+A29. Kernel-based Virtual Machine: a Linux kernel module that provides
+     hardware-assisted virtualization and turns Linux into a type-1
+     hypervisor.
+
+Q30. What is QEMU's role in KVM?
+A30. QEMU emulates devices and provides virtual hardware; KVM
+     accelerates CPU execution.
+
+Q31. What is libvirt?
+A31. A management API/daemon for virtualization platforms. virsh and
+     virt-manager are clients.
+
+Q32. What is virt-manager?
+A32. A graphical tool for managing VMs through libvirt.
+
+Q33. What is virsh?
+A33. A command-line client for libvirt.
+
+Q34. What CPU features are needed for KVM?
+A34. Intel VT-x (vmx) or AMD-V (svm), enabled in BIOS/UEFI.
+
+Q35. What is the default libvirt network?
+A35. A NAT network that lets VMs reach the internet through the host.
+
+Q36. What is a snapshot?
+A36. A saved state of a VM disk (and optionally memory) used for
+     rollback.
+
+Q37. What is live migration?
+A37. Moving a running VM between hosts with little or no downtime.
+
+Q38. What is virtio?
+A38. Paravirtualized drivers for disk/network that improve VM
+     performance.
+
+Q39. Advantages of KVM?
+A39. Open source, in the Linux kernel, hardware-assisted, good
+     performance, wide guest support, integrates with OpenStack/oVirt.
+
+Q40. What is nested virtualization?
+A40. Running a hypervisor inside a VM. It must be enabled on the host;
+     many cloud VMs disable it.
+
+PRACTICAL 3 - SALESFORCE APEX
+-----------------------------
+Q41. What is Salesforce?
+A41. A cloud CRM and application platform. It provides sales, service,
+     marketing and custom apps in a multi-tenant cloud.
+
+Q42. What is Apex?
+A42. A strongly typed, object-oriented language that runs on the
+     Salesforce platform, used for business logic, triggers,
+     controllers and web services.
+
+Q43. Features of Apex?
+A43. Java-like syntax, integrated DML/SOQL, cloud execution,
+     transaction control, governor limits, unit tests, metadata
+     storage.
+
+Q44. What is DML?
+A44. Data Manipulation Language: insert, update, delete, upsert,
+     undelete.
+
+Q45. What is SOQL?
+A45. Salesforce Object Query Language, used to read records, e.g.
+     [SELECT Id, Name FROM Account].
+
+Q46. SOQL vs SQL?
+A46. SOQL queries Salesforce objects and relationships; it has no
+     arbitrary joins and returns sObjects. SQL works on relational
+     tables and supports full joins.
+
+Q47. What is an sObject?
+A47. A Salesforce object in Apex. Standard: Account, Contact. Custom
+     API names end in __c.
+
+Q48. What is a governor limit?
+A48. A per-transaction resource limit. Examples: 100 SOQL queries,
+     150 DML statements, 10,000 SOQL rows, 50,000 DML rows, 10 s CPU.
+
+Q49. Why do governor limits exist?
+A49. To keep the multi-tenant platform fair and stable so one org
+     cannot monopolize shared resources.
+
+Q50. How do you avoid governor limits?
+A50. Bulkify code: query once, process collections, use one DML call
+     for many records, avoid SOQL/DML inside loops.
+
+Q51. What is a Visualforce page?
+A51. A tag-based UI page (<apex:page>) that uses a controller or
+     controller extension.
+
+Q52. What is a controller extension?
+A52. An Apex class that adds logic to a standard/custom controller.
+     BankCustomerCreator extends the standard Account controller.
+
+Q53. What is an Apex trigger?
+A53. Code that runs automatically before/after insert, update, delete
+     or undelete on an object.
+
+Q54. Class vs trigger?
+A54. A class is invoked explicitly; a trigger is invoked automatically
+     by a DML event.
+
+Q55. What is a sandbox?
+A55. A copy of the org used for development and testing without
+     affecting production.
+
+Q56. What is the Apex development process?
+A56. Write code, save/compile, test (unit tests, at least 75% coverage
+     for deployment), then deploy via change set or metadata API.
+
+Q57. What is multi-tenancy in Salesforce?
+A57. Many orgs share the same application servers and database
+     infrastructure, with logical separation of data and metadata.
+
+Q58. Standard vs custom object?
+A58. Standard objects are built in (Account, Contact, Opportunity).
+     Custom objects are created by the developer; API name ends in __c.
+
+PRACTICAL 4 - CUSTOM APP
+------------------------
+Q59. What is a Salesforce app?
+A59. A collection of tabs, objects, pages and automation that appears
+     in the App Launcher and serves a business function.
+
+Q60. Object vs field vs record?
+A60. Object = table, field = column, record = row.
+
+Q61. What is a tab?
+A61. A navigation item that opens an object's list/home page.
+
+Q62. Lookup vs Master-Detail?
+A62. Lookup is optional and does not cascade delete. Master-Detail is
+     required, owns the child, cascades delete and supports roll-up
+     summary fields.
+
+Q63. What is a picklist?
+A63. A field with a fixed list of allowed values.
+
+Q64. What is an Auto Number field?
+A64. A read-only sequential number field with a display format, e.g.
+     ORD-{0000}.
+
+Q65. Profile vs role?
+A65. Profile = permissions (what you can do). Role = record-level
+     visibility in the role hierarchy (whose records you see).
+
+Q66. What is a permission set?
+A66. Extra permissions assigned on top of a profile without changing
+     the profile.
+
+Q67. Lightning vs Classic?
+A67. Lightning is the modern component-based UI; Classic is the older
+     page-based UI.
+
+Q68. What is a change set?
+A68. A container of metadata used to deploy changes between orgs.
+
+Q69. What is a roll-up summary?
+A69. A parent field that calculates COUNT/SUM/MIN/MAX over related
+     Master-Detail children.
+
+Q70. What is the Salesforce data model?
+A70. The objects, fields and relationships in an org. Account is a
+     parent of Contact, Opportunity and custom children via Lookup or
+     Master-Detail.
+
+Q71. What is metadata?
+A71. Configuration data describing objects, fields, code, pages,
+     layouts and permissions. Salesforce stores apps as metadata.
+
+Q72. What is the App Launcher?
+A72. The 9-dot menu used to open Salesforce apps.

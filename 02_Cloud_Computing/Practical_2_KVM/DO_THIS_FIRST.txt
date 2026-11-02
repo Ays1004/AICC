@@ -1,0 +1,314 @@
+============================================================
+CLOUD COMPUTING PRACTICAL 2 - INSTALL AND CONFIGURE KVM
+============================================================
+
+TITLE (from the handout)
+------------------------
+Installation and configuration of virtualization using KVM.
+
+OBJECTIVE
+---------
+To learn the concept of virtualization via KVM.
+
+PREREQUISITE
+------------
+Ubuntu 18.04 or above, internet connection, sudo rights, and a CPU
+with hardware virtualization (Intel VT-x or AMD-V) enabled in BIOS.
+
+FILES IN THIS FOLDER
+--------------------
+Handout.pdf              college handout
+Write-up.pdf             blank write-up
+Output.pdf               sample output reference
+Steps_to_install_KVM.md  the repository's original KVM steps
+
+
+STEP 1 - CHECK THAT VIRTUALIZATION IS ENABLED
+---------------------------------------------
+Open Terminal (Ctrl+Alt+T).
+
+Check the CPU flags:
+
+    grep -Ec '(vmx|svm)' /proc/cpuinfo
+
+- vmx = Intel virtualization
+- svm = AMD virtualization
+- Output greater than 0 means virtualization is available.
+- Output 0 means it is disabled in BIOS/UEFI.
+
+Install the checker and run it:
+
+    sudo apt update
+    sudo apt install -y cpu-checker
+    sudo kvm-ok
+
+Expected output:
+
+    INFO: /dev/kvm exists
+    KVM acceleration can be used
+
+If you see "KVM acceleration can NOT be used", enable Intel VT-x /
+AMD-V (SVM) in BIOS, or ask the lab admin. Inside a cloud VM, nested
+virtualization may be disabled.
+
+You can also check the kernel modules:
+
+    lsmod | grep kvm
+
+You should see kvm_intel or kvm_amd (and kvm).
+
+
+STEP 2 - INSTALL THE PACKAGES
+-----------------------------
+    sudo apt update
+    sudo apt install -y qemu-kvm libvirt-daemon-system libvirt-clients \
+                        virt-manager virtinst bridge-utils
+
+What each package does:
+- qemu-kvm: the emulator and KVM acceleration.
+- libvirt-daemon-system: the libvirt service that manages VMs.
+- libvirt-clients: virsh and other client tools.
+- virt-manager: the graphical VM manager.
+- virtinst: virt-install and other VM provisioning tools.
+- bridge-utils: bridge networking tools.
+- cpu-checker: provides kvm-ok.
+
+If your Ubuntu version says "qemu-kvm is a transitional package",
+that is fine; it installs qemu-system-x86.
+
+
+STEP 3 - START AND ENABLE LIBVIRT
+---------------------------------
+    sudo systemctl enable --now libvirtd
+    sudo systemctl status libvirtd
+
+Press q to exit the status pager.
+
+If your Ubuntu version reports that libvirtd.service was not found,
+try:
+
+    sudo systemctl enable --now virtqemud
+    sudo systemctl status virtqemud
+
+(Ubuntu 24.04 and newer split some libvirt services. The standard
+libvirtd service is still available on Ubuntu 22.04.)
+
+
+STEP 4 - ADD YOUR USER TO THE KVM AND LIBVIRT GROUPS
+----------------------------------------------------
+    sudo usermod -aG libvirt,kvm $USER
+
+Check:
+
+    groups
+
+You should see libvirt and kvm in the list.
+
+Apply the new group membership to the current terminal:
+
+    newgrp libvirt
+
+Or simply log out of the desktop and log in again. A reboot also
+works. Group changes do not apply to terminals that were already
+open before the change.
+
+
+STEP 5 - CHECK THE DEFAULT NETWORK
+----------------------------------
+    sudo virsh net-list --all
+
+If "default" is inactive, start it and make it start automatically:
+
+    sudo virsh net-start default
+    sudo virsh net-autostart default
+
+Check again:
+
+    sudo virsh net-list --all
+
+The default network gives VMs NAT access to the internet.
+
+
+STEP 6 - VERIFY THE INSTALLATION
+--------------------------------
+    virsh list --all
+    virsh version
+    virt-manager --version
+
+`virsh list --all` should work without sudo now that you are in the
+libvirt group. If it says "failed to connect to the hypervisor",
+log out and log in again.
+
+
+STEP 7 - OPEN VIRTUAL MACHINE MANAGER
+-------------------------------------
+From the Ubuntu application menu, search for "Virtual Machine
+Manager" and open it. Or run:
+
+    virt-manager
+
+In the main window you should see:
+
+    QEMU/KVM   Connected
+
+If it shows "Connecting..." and then "Connected", the setup is
+working.
+
+
+STEP 8 - CREATE A TEST VIRTUAL MACHINE (optional, if an ISO is available)
+-------------------------------------------------------------------------
+You need an ISO file, for example Ubuntu Server or a small Linux
+distribution. Downloading a full Ubuntu Desktop ISO is about 4-6 GB,
+so only do this if the lab internet is fast and the teacher asks.
+
+In virt-manager:
+1. Click "Create a new virtual machine" (the computer icon).
+2. Choose "Local install media (ISO image or CDROM)".
+3. Browse to the ISO file.
+4. Choose memory: 2048 MB, CPU: 2.
+5. Choose "Create a disk image for the virtual machine": 10 GB.
+6. Name the VM: test-vm.
+7. Network: default (NAT).
+8. Click Finish and follow the installer.
+
+CLI alternative (replace the ISO path):
+
+    sudo virt-install \
+      --name test-vm \
+      --ram 2048 \
+      --vcpus 2 \
+      --disk size=10 \
+      --cdrom /home/$USER/Downloads/ubuntu-22.04.iso \
+      --os-variant ubuntu22.04 \
+      --network network=default \
+      --graphics spice
+
+Useful virsh commands:
+
+    virsh list --all
+    virsh start test-vm
+    virsh shutdown test-vm
+    virsh destroy test-vm      # force power off
+    virsh undefine test-vm     # delete the VM definition
+
+If you do not have an ISO, skip this step. The practical only asks
+for installation and configuration of KVM, which is complete after
+Steps 1-7. Take a screenshot of the connected virt-manager window.
+
+
+STEP 9 - WHAT TO SCREENSHOT
+---------------------------
+1. Output of `sudo kvm-ok` (KVM acceleration can be used).
+2. Output of `sudo systemctl status libvirtd` (active/running).
+3. Output of `virsh list --all`.
+4. The virt-manager window showing QEMU/KVM connected.
+5. Optional: a test VM running.
+
+Attach the screenshots to Write-up.pdf.
+
+
+HOW KVM WORKS (for viva)
+-------------------------
+- KVM = Kernel-based Virtual Machine. It is a Linux kernel module
+  (kvm.ko) that turns Linux into a type-1 (bare-metal) hypervisor.
+- It uses the CPU virtualization extensions: Intel VT-x or AMD-V.
+- QEMU provides the device emulation and the virtual hardware.
+  KVM provides the CPU acceleration. Together they run VMs.
+- libvirt is a management API/daemon. virsh and virt-manager are
+  clients that talk to libvirt.
+- Each VM is a normal Linux process scheduled by the Linux scheduler.
+- A VM has virtual CPU, memory, disk, network card and graphics.
+
+Type 1 vs type 2 hypervisor:
+- Type 1 runs directly on the hardware (KVM, VMware ESXi, Hyper-V).
+  KVM is unusual because it is part of the Linux kernel.
+- Type 2 runs on top of a host operating system (VirtualBox, VMware
+  Workstation, QEMU without KVM).
+
+Full virtualization vs paravirtualization:
+- Full: the guest OS is unmodified and does not know it is virtualized.
+- Para: the guest OS is modified to cooperate with the hypervisor for
+  better performance. Virtio drivers are a common example.
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. What is virtualization?
+A1. Creating virtual versions of physical resources (CPU, memory,
+    storage, network) so multiple isolated virtual machines can run
+    on one physical machine.
+
+Q2. What is KVM?
+A2. Kernel-based Virtual Machine: an open-source Linux kernel module
+    that provides hardware-assisted virtualization. It turns Linux
+    into a type-1 hypervisor.
+
+Q3. What is a hypervisor?
+A3. Software that creates and manages virtual machines and allocates
+    physical resources to them.
+
+Q4. Type 1 vs type 2 hypervisor?
+A4. Type 1 runs directly on hardware (KVM, ESXi, Hyper-V). Type 2 runs
+    on a host OS (VirtualBox, VMware Workstation).
+
+Q5. What is QEMU's role?
+A5. QEMU emulates devices and provides the virtual hardware. With KVM
+    it uses hardware acceleration for the CPU.
+
+Q6. What is libvirt?
+A6. A toolkit/daemon and API for managing virtualization platforms.
+    virsh and virt-manager are libvirt clients.
+
+Q7. What is virt-manager?
+A7. A graphical desktop application for managing virtual machines
+    through libvirt.
+
+Q8. What is a virtual machine?
+A8. A software emulation of a physical computer with its own virtual
+    CPU, memory, disk, network and OS.
+
+Q9. What is hardware virtualization?
+A9. CPU support (Intel VT-x / AMD-V) that lets a hypervisor run guest
+    code directly on the CPU with isolation.
+
+Q10. What is a guest OS and a host OS?
+A10. The guest OS runs inside the VM. The host OS runs on the physical
+     machine and hosts the hypervisor.
+
+Q11. What is NAT networking in libvirt?
+A11. The default virtual network. VMs can reach the internet through
+     the host, but incoming connections from outside need port
+     forwarding.
+
+Q12. Difference between a VM and a container?
+A12. A VM has its own guest kernel and full OS, so it is heavier but
+     more isolated. A container shares the host kernel and packages
+     only the application and user-space libraries, so it is lighter.
+
+Q13. What is live migration?
+A13. Moving a running VM from one host to another with little or no
+     downtime.
+
+Q14. What is a snapshot?
+A14. A saved state of a VM's disk (and optionally memory) at a point
+     in time, used for rollback.
+
+Q15. What are the advantages of KVM?
+A15. Open source, built into Linux, hardware-assisted, good
+     performance, supports many guest OSes, and works with libvirt,
+     oVirt, OpenStack and Proxmox.
+
+
+COMMON PROBLEMS
+---------------
+- `kvm-ok` says acceleration cannot be used: virtualization is
+  disabled in BIOS, or the machine is itself a VM without nested
+  virtualization. Show the output to the teacher.
+- `virsh` permission denied: you are not in the libvirt group, or you
+  have not logged out/in after usermod.
+- libvirtd not found: try the virtqemud service (newer Ubuntu).
+- virt-manager shows "Connecting..." forever: libvirtd is not
+  running. Start it and check `systemctl status`.
+- No ISO: skip VM creation; the installation/configuration is still
+  complete.
+- `sudo apt update` fails: check the lab internet/proxy.

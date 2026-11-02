@@ -1,0 +1,247 @@
+============================================================
+ARTIFICIAL INTELLIGENCE - VIVA QUESTION BANK
+============================================================
+
+GENERAL AI
+----------
+Q1. What is Artificial Intelligence?
+A1. The branch of computer science that builds systems able to perform
+    tasks that normally require human intelligence: learning,
+    reasoning, perception, planning and language understanding.
+
+Q2. What is an intelligent agent?
+A2. An entity that perceives its environment through sensors and acts
+    on it through actuators to maximize its performance measure.
+
+Q3. What is a rational agent?
+A3. An agent that chooses the action expected to maximize its
+    performance measure, given its percept sequence and knowledge.
+
+Q4. What are the types of agents?
+A4. Simple reflex, model-based reflex, goal-based, utility-based and
+    learning agents.
+
+Q5. What is a state space?
+A5. The set of all states reachable from the initial state by applying
+    actions, plus the actions, transition model, goal test and path
+    cost.
+
+Q6. Uninformed vs informed search?
+A6. Uninformed (blind) search has no estimate of distance to the goal
+    (BFS, DFS, uniform cost). Informed search uses a heuristic (A*,
+    greedy best-first).
+
+Q7. What is a heuristic?
+A7. A function h(n) that estimates the cost from node n to the goal.
+
+Q8. What is an admissible heuristic?
+A8. One that never overestimates the true cost to the goal. It
+    guarantees A* optimality.
+
+Q9. What is a consistent (monotonic) heuristic?
+A9. h(n) <= cost(n, n') + h(n'). Consistency implies admissibility and
+    lets A* skip re-expanding nodes.
+
+Q10. What is the difference between BFS and uniform-cost search?
+A10. BFS expands by depth and is optimal only when every step costs the
+     same. Uniform-cost search expands the lowest path cost and works
+     with different edge costs.
+
+Q11. What is the difference between a graph and a tree?
+A11. A tree is a connected acyclic graph; a graph may have cycles and
+     may be disconnected.
+
+Q12. What is the difference between AI and machine learning?
+A12. AI is the broad goal of intelligent behavior. ML is a subset that
+     learns patterns from data instead of relying only on hand-written
+     rules.
+
+PRACTICAL 1 - DFS AND BFS
+-------------------------
+Q13. DFS vs BFS?
+A13. DFS goes deep first with a stack; BFS visits level by level with a
+     queue. BFS finds the shortest path in an unweighted graph; DFS
+     does not.
+
+Q14. Time and space complexity of DFS/BFS?
+A14. O(V + E) time, O(V) extra space with an adjacency list.
+
+Q15. Why mark vertices as visited?
+A15. To avoid processing the same vertex again and to prevent infinite
+     loops in a cyclic graph.
+
+Q16. Which traversal uses recursion naturally?
+A16. DFS. BFS is naturally iterative with a queue, although a recursive
+     helper can be used.
+
+Q17. Where are DFS/BFS used?
+A17. Web crawling, social networks, shortest path, cycle detection,
+     topological sorting, puzzle solving and network broadcasting.
+
+PRACTICAL 2 - A* AND 8-PUZZLE
+-----------------------------
+Q18. What is A*?
+A18. A best-first search that selects the node with the lowest
+     f(n) = g(n) + h(n).
+
+Q19. What are g(n), h(n) and f(n)?
+A19. g(n) = actual cost from start to n; h(n) = estimated cost from n
+     to goal; f(n) = estimated total cost through n.
+
+Q20. Why is A* optimal?
+A20. With an admissible heuristic, it never overestimates the cost of
+     the optimal path, so the goal is reached with the lowest cost.
+
+Q21. What is the heuristic used in the 8-puzzle program?
+A21. Number of misplaced tiles (excluding the blank). Manhattan
+     distance is another admissible heuristic.
+
+Q22. What are OPEN and CLOSED lists?
+A22. OPEN holds generated, unexpanded nodes (priority queue). CLOSED
+     holds expanded states.
+
+Q23. When is an 8-puzzle unsolvable?
+A23. When the number of inversions is odd (for a 3x3 puzzle with the
+     blank moving in the same row). The program reports no solution.
+
+Q24. What is the branching factor of the 8-puzzle?
+A24. At most 4, because the blank can move up, down, left or right.
+
+Q25. A* vs greedy best-first?
+A25. Greedy uses only h(n); A* uses g(n) + h(n), so A* accounts for
+     cost already spent and is optimal with an admissible heuristic.
+
+PRACTICAL 3 - GREEDY SEARCH
+---------------------------
+Q26. What is a greedy algorithm?
+A26. An algorithm that makes the locally best choice at each step
+     without backtracking.
+
+Q27. Is greedy always optimal?
+A27. No. It is optimal only for problems with the greedy-choice
+     property and optimal substructure.
+
+Q28. Why is selection sort greedy?
+A28. Each pass selects the minimum remaining element and places it in
+     its final position.
+
+Q29. Selection sort complexity?
+A29. O(n^2) time in all cases, O(1) extra space. It is not stable in
+     the simple swap form.
+
+Q30. Greedy criterion in job scheduling?
+A30. Sort jobs by decreasing profit and place each job in the latest
+     free slot before its deadline.
+
+Q31. Difference between greedy and dynamic programming?
+A31. Greedy makes one irreversible choice; DP solves overlapping
+     subproblems and combines them. Greedy is faster but not always
+     correct.
+
+Q32. Prim's vs Kruskal's MST?
+A32. Prim's grows one tree from a start vertex, adding the cheapest
+     edge from the tree to a new vertex. Kruskal's sorts all edges and
+     adds the cheapest edge that does not form a cycle (union-find).
+
+Q33. Dijkstra's algorithm?
+A33. Single-source shortest path for non-negative weights. It is
+     greedy: repeatedly finalize the nearest unvisited vertex.
+
+PRACTICAL 4 - N-QUEENS / CSP
+----------------------------
+Q34. What is a CSP?
+A34. A problem defined by variables, domains and constraints. A
+     solution assigns values to all variables without violating any
+     constraint.
+
+Q35. Variables, domains and constraints in n-queens?
+A35. Variables = rows/queens; domain = columns 0..n-1; constraints =
+     no shared column, no shared diagonal.
+
+Q36. What is backtracking?
+A36. Incremental depth-first construction with undo when a partial
+     assignment cannot be completed.
+
+Q37. What is branch and bound?
+A37. Search with pruning: abandon a branch when its bound cannot beat
+     the best known solution. In n-queens, an attacked column/diagonal
+     prunes the branch.
+
+Q38. Why are the diagonal arrays used?
+A38. They make the safety check O(1). Right diagonal: i + j; left
+     diagonal: i - j + n - 1.
+
+Q39. Number of solutions for 4-queens and 8-queens?
+A39. 4-queens has 2 solutions; 8-queens has 92.
+
+Q40. Complexity of n-queens?
+A40. O(n!) worst case, but pruning reduces the search greatly.
+
+Q41. Graph coloring as a CSP?
+A41. Variables = vertices; domain = colors; constraint = adjacent
+     vertices must have different colors.
+
+PRACTICAL 5 - CHATBOT
+---------------------
+Q42. What is a chatbot?
+A42. A program that simulates conversation with a user via text or
+     voice.
+
+Q43. Rule-based vs ML chatbot?
+A43. Rule-based uses hand-written patterns/keywords; ML learns from
+     data and can generalize. This practical is rule-based.
+
+Q44. What is NLP?
+A44. Natural Language Processing: AI techniques for understanding and
+     generating human language.
+
+Q45. How does the practical chatbot match input?
+A45. It lowercases the input and checks whether keywords such as
+     "menu", "cost" or "contact" occur in the string.
+
+Q46. What are the limitations of this chatbot?
+A46. It cannot handle unseen phrasing, has no context or memory, and
+     no real language understanding.
+
+Q47. How can it be improved?
+A47. Intent classification, embeddings, dialogue state tracking, or an
+     LLM API.
+
+Q48. What is NLTK?
+A48. The Natural Language Toolkit: a Python library for tokenization,
+     stemming, tagging, parsing and chatbot pattern matching.
+
+PRACTICAL 6 - EXPERT SYSTEM
+---------------------------
+Q49. What is an expert system?
+A49. A system that uses a domain knowledge base and an inference engine
+     to solve problems at expert level.
+
+Q50. Components of an expert system?
+A50. Knowledge base, inference engine, user interface (plus explanation
+     facility and knowledge acquisition module).
+
+Q51. Forward vs backward chaining?
+A51. Forward: data-driven, from facts to conclusions. Backward:
+     goal-driven, from a hypothesis back to supporting facts.
+
+Q52. Which chaining does the medical program use?
+A52. Forward chaining: it collects symptoms (facts) and derives
+     diseases (conclusions).
+
+Q53. What is a rule-based system?
+A53. A system whose knowledge is represented as IF-THEN rules.
+
+Q54. Limitations of expert systems?
+A54. Difficult knowledge acquisition, high maintenance cost, no
+     learning, brittle outside the rule base, cannot handle novel
+     situations.
+
+Q55. Expert system vs traditional program?
+A55. The knowledge base is separate from the inference engine, so rules
+     can change without rewriting the control flow. Expert systems can
+     also explain their reasoning.
+
+Q56. What is the role of the explanation facility?
+A56. It explains how a conclusion was reached (which rules/facts were
+     used), which increases user trust.

@@ -1,0 +1,45 @@
+
+Menu:
+1. Input numbers and perform selection sort
+2. Perform selection sort
+3. Input graph
+4. Run Prim's MST algorithm
+5. Exit
+Enter your choice: Enter total numbers: Enter number: Enter number: Enter number: Enter number: Enter number: Numbers you entered: [30.0, 10.0, 50.0, 20.0, 40.0]
+
+Menu:
+1. Input numbers and perform selection sort
+2. Perform selection sort
+3. Input graph
+4. Run Prim's MST algorithm
+5. Exit
+Enter your choice: Sorted numbers: [10.0, 20.0, 30.0, 40.0, 50.0]
+
+Menu:
+1. Input numbers and perform selection sort
+2. Perform selection sort
+3. Input graph
+4. Run Prim's MST algorithm
+5. Exit
+Enter your choice: Enter number of vertices: Enter adjacency matrix row by row:
+Row 0: Row 1: Row 2: Row 3: Row 4: Row 5: 
+Menu:
+1. Input numbers and perform selection sort
+2. Perform selection sort
+3. Input graph
+4. Run Prim's MST algorithm
+5. Exit
+Enter your choice: Edge : Weight
+0 - 1 : 7
+1 - 2 : 3
+2 - 4 : 3
+4 - 3 : 2
+4 - 5 : 2
+
+Menu:
+1. Input numbers and perform selection sort
+2. Perform selection sort
+3. Input graph
+4. Run Prim's MST algorithm
+5. Exit
+Enter your choice: Exiting...

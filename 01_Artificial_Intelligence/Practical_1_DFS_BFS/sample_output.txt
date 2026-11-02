@@ -1,0 +1,50 @@
+
+
+ ---------- MAIN MENU ----------
+1. Add edge
+2. Depth First Search (DFS)
+3. Breadth First Search (BFS)
+4. Exit
+Choose an option (1-4):	--------------------------------
+
+Total edges to add:	EDGE 1 ->
+(Enter ONE vertex name per line.)
+Enter first vertex for edge 1: Enter second vertex for edge 1: EDGE 2 ->
+(Enter ONE vertex name per line.)
+Enter first vertex for edge 2: Enter second vertex for edge 2: EDGE 3 ->
+(Enter ONE vertex name per line.)
+Enter first vertex for edge 3: Enter second vertex for edge 3: EDGE 4 ->
+(Enter ONE vertex name per line.)
+Enter first vertex for edge 4: Enter second vertex for edge 4: 
+Vertices and their neighbours are:	 {'S': ['A', 'B'], 'A': ['S', 'C'], 'B': ['S', 'D'], 'C': ['A'], 'D': ['B']}
+
+
+ ---------- MAIN MENU ----------
+1. Add edge
+2. Depth First Search (DFS)
+3. Breadth First Search (BFS)
+4. Exit
+Choose an option (1-4):	--------------------------------
+
+Enter starting vertex for DFS:	Depth First Search (DFS):	S A C B D 
+
+
+ ---------- MAIN MENU ----------
+1. Add edge
+2. Depth First Search (DFS)
+3. Breadth First Search (BFS)
+4. Exit
+Choose an option (1-4):	--------------------------------
+
+Enter starting vertex for BFS:	Breadth First Search (BFS):	S A B C D 
+
+
+ ---------- MAIN MENU ----------
+1. Add edge
+2. Depth First Search (DFS)
+3. Breadth First Search (BFS)
+4. Exit
+Choose an option (1-4):	--------------------------------
+
+## END OF CODE
+

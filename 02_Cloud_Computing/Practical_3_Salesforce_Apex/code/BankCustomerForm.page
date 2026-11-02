@@ -1,0 +1,36 @@
+<!--
+  Cloud Computing Practical 3 - Bank application
+  Visualforce page name: BankCustomerForm
+  Controller class: BankCustomerCreator
+
+  In Developer Console:
+  File -> New -> Visualforce Page -> Name: BankCustomerForm
+  Delete the default code, paste this file, press Ctrl+S.
+  Click Preview to open the form.
+-->
+<apex:page standardController="Account" extensions="BankCustomerCreator">
+    <apex:form>
+        <apex:pageMessages />
+
+        <apex:pageBlock title="Create Bank Customer">
+            <apex:pageBlockSection columns="1">
+                <apex:inputText value="{!customerName}" label="Customer Name" />
+                <apex:inputText value="{!contactNumber}" label="Contact Number" />
+                <apex:inputText value="{!accountNumber}" label="Account Number" />
+
+                <apex:selectList value="{!accountType}" size="1" label="Account Type">
+                    <apex:selectOptions value="{!accountTypeOptions}" />
+                </apex:selectList>
+
+                <apex:selectList value="{!customerSegment}" size="1" label="Customer Segment">
+                    <apex:selectOptions value="{!segmentOptions}" />
+                </apex:selectList>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockButtons>
+                <apex:commandButton value="Create" action="{!createCustomer}" />
+                <apex:commandButton value="Cancel" action="{!cancelCreation}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,167 @@
+============================================================
+PRACTICAL 1 - DEPTH FIRST SEARCH (DFS) AND BREADTH FIRST SEARCH (BFS)
+============================================================
+
+PROBLEM STATEMENT (from the handout)
+------------------------------------
+Implement the Depth First Search algorithm and the Breadth First
+Search algorithm. Use an undirected graph and develop a recursive
+algorithm for searching all the vertices of a graph or tree data
+structure.
+
+FILES IN THIS FOLDER
+--------------------
+code/main.py                       recommended program
+code/alternative_adjacency_matrix.py  hard-coded graph, no input
+code/my_simple_dfs_bfs.py          simpler version using an adjacency list
+Handout.pdf                        college handout
+Write-up.pdf                       blank write-up
+sample_input.txt                   input used in the demo below
+sample_output.txt                  exact output of the demo
+
+
+STEP-BY-STEP IN THE UBUNTU LAB
+------------------------------
+1. Open the Terminal: press Ctrl+Alt+T.
+
+2. Find the pendrive name:
+
+       ls /media/$USER
+
+   Suppose the name shown is MYUSB. Then go to this practical:
+
+       cd "/media/$USER/MYUSB/01_Artificial_Intelligence/Practical_1_DFS_BFS/code"
+
+   Shortcut: open the "code" folder in the Files app, right-click an
+   empty area, and choose "Open in Terminal". Then skip step 2.
+
+3. Run the program:
+
+       python3 main.py
+
+4. The menu appears. Type these values, pressing Enter after each one:
+
+       1        <- Add edge
+       4        <- total edges
+       S        <- first vertex of edge 1
+       A        <- second vertex of edge 1
+       S        <- first vertex of edge 2
+       B
+       A
+       C
+       B
+       D
+       2        <- DFS
+       S        <- start vertex
+       3        <- BFS
+       S        <- start vertex
+       4        <- Exit
+
+   IMPORTANT: enter ONE vertex name per line. Do not type "S A" on
+   one line, because the program treats that whole line as one name.
+
+5. To run the same demo automatically instead of typing:
+
+       python3 main.py < ../sample_input.txt
+
+6. To run the extra hard-coded version (no input needed):
+
+       python3 alternative_adjacency_matrix.py
+
+
+WHAT YOU SHOULD SEE
+-------------------
+After adding the four edges, the graph is:
+
+       S - A
+       S - B
+       A - C
+       B - D
+
+DFS starting from S:
+
+       S A C B D
+
+BFS starting from S:
+
+       S A B C D
+
+(The order can differ if you add the edges in a different order,
+because the adjacency list keeps insertion order. For the sample
+input above, the output above is what you will get.)
+
+
+HOW THE CODE WORKS (for viva)
+-----------------------------
+- The graph is stored as an adjacency list: a dictionary where each
+  vertex maps to a list of its neighbours.
+- add_edge(u, v) adds the edge in both directions because the graph
+  is undirected.
+- DFS is recursive:
+      visit the current vertex,
+      mark it visited,
+      recursively visit every unvisited neighbour.
+  DFS uses the call stack (or an explicit stack).
+- BFS uses a queue (collections.deque):
+      put the start vertex in the queue,
+      remove a vertex from the front,
+      add all unvisited neighbours to the back,
+      repeat until the queue is empty.
+- BFS visits vertices level by level.
+
+Complexity for a graph with V vertices and E edges:
+       DFS: O(V + E) time, O(V) space
+       BFS: O(V + E) time, O(V) space
+
+
+VIVA QUESTIONS AND SHORT ANSWERS
+--------------------------------
+Q1. Difference between DFS and BFS?
+A1. DFS goes as deep as possible before backtracking and uses a stack.
+    BFS visits all neighbours at the current level first and uses a
+    queue. BFS finds the shortest path in an unweighted graph; DFS
+    does not guarantee the shortest path.
+
+Q2. Why is DFS called recursive?
+A2. Because it calls itself on each unvisited neighbour. The recursion
+    stack stores the path being explored.
+
+Q3. Which data structure does BFS use?
+A3. A FIFO queue. In this program it is collections.deque.
+
+Q4. Time and space complexity of DFS/BFS?
+A4. O(V + E) time and O(V) extra space for both, using an adjacency
+    list.
+
+Q5. What is an undirected graph?
+A5. A graph where an edge between u and v can be travelled in both
+    directions. add_edge adds u->v and v->u.
+
+Q6. Can DFS get stuck in an infinite loop?
+A6. On a graph with cycles, yes, if visited vertices are not marked.
+    The visited set prevents this.
+
+Q7. What is the difference between a graph and a tree?
+A7. A tree is a connected acyclic graph. A graph may have cycles and
+    may be disconnected. DFS/BFS work on both.
+
+Q8. How would you make this directed?
+A8. Remove the reverse edge line in add_edge (the line that appends u
+    to graph[v]).
+
+
+COMMON MISTAKES
+---------------
+- Typing "S A" on one line. Enter S, press Enter, then A, press Enter.
+- Starting DFS/BFS with a vertex that was never added. Add edges first.
+- Expecting the same traversal order every time. It depends on the
+  order of neighbours in the adjacency list.
+- If the program waits, it is asking for the next input value.
+
+AFTER THE PRACTICAL
+-------------------
+Take a screenshot of:
+1. the code in the editor / terminal,
+2. the DFS output,
+3. the BFS output.
+Attach them to Write-up.pdf, or write the output neatly by hand.
